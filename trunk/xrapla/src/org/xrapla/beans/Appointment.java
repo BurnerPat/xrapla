@@ -2,6 +2,7 @@ package org.xrapla.beans;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import javax.persistence.Id;
 
@@ -15,8 +16,8 @@ public class Appointment {
 	@Id
 	private Date time;
 	
-	private int duration;
-	private Lecture lecture;
+	private int duration;	
+	private Lecture lecture;	
 	private Group group;
 	
 	public Appointment(){
@@ -45,7 +46,7 @@ public class Appointment {
 	}
 	public void setDuration(int duration) {
 		this.duration = duration;
-	}
+	}	
 	public Lecture getLecture() {
 		return lecture;
 	}
