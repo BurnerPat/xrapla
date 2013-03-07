@@ -33,6 +33,9 @@ public class Course {
 	}
 	public void setTutor(Tutor tutor) {
 		this.tutor = tutor;
-	}	
-	
+	}		
+	public String toString()
+	{
+		return name + " [" + tutor + "]";
+	}
 }
