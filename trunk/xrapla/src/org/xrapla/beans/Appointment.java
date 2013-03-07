@@ -17,7 +17,8 @@ public class Appointment {
 	
 	private int duration;	
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name="LECTURE_ID")
 	private Lecture lecture;	
 	
 	@ManyToOne
