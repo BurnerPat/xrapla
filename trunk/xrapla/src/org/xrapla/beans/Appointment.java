@@ -1,10 +1,9 @@
 package org.xrapla.beans;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import java.util.List;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Appointment {
@@ -17,7 +16,12 @@ public class Appointment {
 	private Date time;
 	
 	private int duration;	
+	
+	@OneToOne
 	private Lecture lecture;	
+	
+	@ManyToOne
+	@JoinColumn(name="GROUP_ID")
 	private Group group;
 	
 	public Appointment(){
@@ -56,7 +60,7 @@ public class Appointment {
 	public Group getGroup() {
 		return group;
 	}
-	public void setGroup(Group group) {
+	public void setGroups(Group group) {
 		this.group = group;
 	}	
 	
