@@ -1,5 +1,8 @@
 package org.xrapla.beans;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Tutor extends User {
 
 	private String title;

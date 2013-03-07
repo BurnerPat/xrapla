@@ -1,9 +1,11 @@
 package org.xrapla.beans;
 
 import java.util.Date;
+import javax.persistence.Entity;
 
 import javax.persistence.Id;
 
+@Entity
 public class Appointment {
 
 	@Id	
