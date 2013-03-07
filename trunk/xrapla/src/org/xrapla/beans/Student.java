@@ -1,5 +1,8 @@
 package org.xrapla.beans;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Student extends User {
 	
 	private int number;
