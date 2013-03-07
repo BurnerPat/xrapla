@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class User {
 
 	@Id	
-	private int username;	
+	private String username;	
 	private String password;
 	private String lastname;
 	private String firstname;
@@ -16,10 +16,10 @@ public class User {
 	public User(){
 	}
 	
-	public int getUsername() {
+	public String getUsername() {
 		return username;
 	}
-	public void setId(int username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getPassword() {
