@@ -1,9 +1,14 @@
 package org.xrapla.beans;
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Group {
@@ -13,6 +18,9 @@ public class Group {
 	
 	private String name;
 	private Course course;
+
+	@OneToMany(mappedBy="group")
+	private List<Appointment> appointments; 
 	
 	public Group (){
 	}	
