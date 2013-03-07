@@ -1,0 +1,51 @@
+LOGIN:
+=========================================
+
+Voraussetzungen:
+=========================================
+1. Statische Konstanten (Constants.java):
+	---
+	public static final String POST_PARAMETER_USERNAME = "username";
+	public static final String POST_PARAMETER_PASSWORD = "password";
+	public static final String SESSION_ATTRIBUTE_LOGGED_IN = "isLoggedIn";
+	public static final String LOGIN_PAGE = "/login.jsp";
+	public static final String LOGIN_AJAX_RETURN_SUCCESS = "success";
+	public static final String LOGIN_AJAX_RETURN_FAILURE = "failure";
+	---
+=========================================
+	
+Ablauf:
+=========================================
+1. User schickt Anfrage -> Session wird erstellt
+2. Überprüfung von Login (im doGet / doPost) über:
+	---
+	HttpSession session = request.getSession(true);
+	Boolean isLoggedIn = (Boolean)session.getAttribute(Constants.SESSION_ATTRIBUTE_LOGGED_IN);
+	isLoggedIn = (isLoggedIn != null) ? isLoggedIn : Boolean.valueOf(false);
+	[...]
+	if (isLoggedIn) {
+		request.getRequestDispatcher(target).forward(request, response);
+	}
+	else {
+		request.getRequestDispatcher(Constants.LOGIN_PAGE).forward(request, response);
+	}
+	---
+3. Einloggen im Login-Servlet (doPost):
+	---
+	String username = request.getParameter(Constants.POST_PARAMETER_USERNAME);
+	String password = request.getParameter(Constants.POST_PARAMETER_PASSWORD);
+	
+	PrintWriter out = new PrintWriter(request.getOutputStream());
+	
+	UserHandler handler = new UserHandler(); //tbd
+	if (handler.isValidUser(username, password)) { //tbd
+		request.getSession(true).setAttribute(Constants.SESSION_ATTRIBUTE_LOGGED_IN, Boolean.valueOf(true));
+		out.print(Constants.LOGIN_AJAX_RETURN_SUCCESS);
+	}
+	else {
+		out.print(Constants.LOGIN_AJAX_RETURN_FAILURE);
+	}
+	
+	out.close();
+	---
+=========================================
