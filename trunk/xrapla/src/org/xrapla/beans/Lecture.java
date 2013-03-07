@@ -11,8 +11,8 @@ public class Lecture {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	Course course;
-	Docent docent;
+	private Course course;
+	private Docent docent;
 
 	public Lecture(){
 	}
