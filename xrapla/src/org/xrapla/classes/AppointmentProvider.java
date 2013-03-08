@@ -17,7 +17,7 @@ public class AppointmentProvider {
 		
 	@SuppressWarnings("unchecked")
 	public List<Appointment> getAppointments(int weekOfYear, int year)
-	{			    
+	{			    		
 	    Calendar monday = new GregorianCalendar();	    
 	    monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);	   	
 	    	    
@@ -56,17 +56,13 @@ public class AppointmentProvider {
 	    		"FROM Appointment" +
 	    		"Where date >= ?1" +
 	    		"LIMIT 2");
-	    
-	    
+	        
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    q.setParameter(1, sdf.format(date));
 	    		
 		List<Appointment> appointments = q.getResultList();
 				
-		return appointments;
-		
-		
-		
+		return appointments;			
 	}
 	
 	private String calendarToSql(Calendar day)	
@@ -75,7 +71,4 @@ public class AppointmentProvider {
 					day.get(Calendar.MONTH) + "-" +
 					day.get(Calendar.DATE); 
 	}
-	
-	
-
 }
