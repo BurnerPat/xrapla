@@ -8,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Docent {
-	
+public class Docent extends User{
+		
 	private String title;
 	private String subject;
 	

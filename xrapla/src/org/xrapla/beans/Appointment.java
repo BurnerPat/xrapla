@@ -11,8 +11,10 @@ public class Appointment {
 	@Id	
 	private String room;
 	@Id
+	@Temporal(TemporalType.DATE)
 	private Date date;
 	@Id
+	@Temporal(TemporalType.TIME)
 	private Date time;
 	
 	private int duration;	

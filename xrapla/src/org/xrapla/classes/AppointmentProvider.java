@@ -29,21 +29,23 @@ public class AppointmentProvider {
 	    // Build and execute SQL-Statement
 	    Query q = em.createQuery(
 	    		"SELECT * " +
-	    		"FROM Appointment" +
-	    		"WHERE date BETWEEN " + 
-	    				calendarToSql(monday) +
-    				" AND " +
-    					calendarToSql(sunday));	   
+	    		"FROM Appointment " +
+	    		"WHERE date BETWEEN ?1 AND ?2");
+	    
+	    q.setParameter(1, calendarToSql(monday));
+	    q.setParameter(2, calendarToSql(sunday));
+	    
     	List<Appointment> appointments = q.getResultList();
     	
 	    return appointments;
 	}
 	
 	private String calendarToSql(Calendar day)	
-	{		
+	{	
+		
 		return day.get(Calendar.YEAR) + "-" +
-				day.get(Calendar.MONTH) + "-" +
-				day.get(Calendar.DATE); 
+					day.get(Calendar.MONTH) + "-" +
+					day.get(Calendar.DATE); 
 	}
 	
 	
