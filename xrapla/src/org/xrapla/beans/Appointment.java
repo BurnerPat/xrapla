@@ -7,7 +7,11 @@ import javax.persistence.*;
 
 @Entity
 public class Appointment {
-
+	
+	@Transient
+	public static final String CATEGORY_EXAM = "exam";
+	public static final String CATEGORY_DEFAULT = "default";
+	
 	@Id	
 	private String room;
 	@Id
