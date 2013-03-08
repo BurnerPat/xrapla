@@ -42,4 +42,12 @@ public class Student extends User {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
 }
