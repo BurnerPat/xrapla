@@ -70,8 +70,7 @@ public class AppointmentProvider {
 	}
 	
 	private String calendarToSql(Calendar day)	
-	{	
-		
+	{			
 		return day.get(Calendar.YEAR) + "-" +
 					day.get(Calendar.MONTH) + "-" +
 					day.get(Calendar.DATE); 
