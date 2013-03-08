@@ -1,5 +1,7 @@
 package org.xrapla.beans;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -63,4 +65,18 @@ public class Appointment {
 		this.group = group;
 	}	
 	
+	public String toString(){
+		SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(time);
+		cal.add(Calendar.MILLISECOND, duration);
+		
+		return sdfDate.format(date) 
+				+ " " + sdfTime.format(time) 
+				+ " - " 
+				+ cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) 
+				+ "[" + room + "]" ;
+	}
 }
