@@ -18,6 +18,7 @@ public class Appointment {
 	private Date time;
 	
 	private int duration;	
+	private String category;
 	
 	@ManyToOne
 	@JoinColumn(name="LECTURE_ID")
@@ -63,10 +64,19 @@ public class Appointment {
 	public Group getGroup() {
 		return group;
 	}
-	public void setGroups(Group group) {
-		this.group = group;
-	}	
 	
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}	
+
 	public String toString(){
 		SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
 		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
