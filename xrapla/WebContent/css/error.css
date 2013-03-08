@@ -1,0 +1,25 @@
+#error_container {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 25%;
+	text-align: center;
+}
+
+#error_container h1 {
+	margin-bottom: 4px;
+}
+
+#error_container h2 {
+	font-family: jabjai;
+	color: white;
+	text-decoration: none;
+	font-size: 48px;
+}
+
+#error_container .line {
+	max-width: 512px;
+	display: inline-block;
+	margin-bottom: 16px;
+	color: white;
+}
