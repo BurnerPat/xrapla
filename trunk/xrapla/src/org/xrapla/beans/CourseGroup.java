@@ -9,10 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class Course {
-
+public class CourseGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -20,17 +20,17 @@ public class Course {
 	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name="TUTOR_ID")
-	private Tutor tutor;
+	@JoinColumn(name="COURSE_ID")
+	private Course course;
+
+	@OneToMany(mappedBy="group")
+	private List<Appointment> appointments; 
 	
-	@OneToMany(mappedBy="course")
-	private List<CourseGroup> groups;
-	
-	@OneToMany(mappedBy="course")
+	@ManyToMany(mappedBy="groups")	
 	private List<Student> students;
 	
-	public Course(){
-	}
+	public CourseGroup (){
+	}	
 	
 	public int getId() {
 		return id;
@@ -44,18 +44,19 @@ public class Course {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Tutor getTutor() {
-		return tutor;
+	public Course getCourse() {
+		return course;
 	}
-	public void setTutor(Tutor tutor) {
-		this.tutor = tutor;
-	}		
-	public List<CourseGroup> getGroups() {
-		return groups;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
-	public void setGroups(List<CourseGroup> groups) {
-		this.groups = groups;
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 	public List<Student> getStudents() {
@@ -64,10 +65,6 @@ public class Course {
 
 	public void setStudents(List<Student> students) {
 		this.students = students;
-	}
+	}	
 
-	public String toString()
-	{
-		return name + " [" + tutor + "]";
-	}
 }
