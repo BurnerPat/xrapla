@@ -2,7 +2,7 @@ package org.xrapla.classes;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -10,32 +10,33 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.xrapla.beans.*;
 
 public class AppointmentProvider {
-		
-	@SuppressWarnings("unchecked")
+			
 	public List<Appointment> getAppointments(int weekOfYear, int year)
 	{			    		
 	    Calendar monday = new GregorianCalendar();	    
-	    monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);	   	
+	    monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);	 	    
 	    	    
-	    Calendar sunday = monday;
-	    sunday.add(Calendar.DATE, 7);	
+	    Calendar sunday = new GregorianCalendar();
+	    sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
+	    sunday.add(Calendar.DATE, 7);		    
 	    
 		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory("xrapla");
 	    EntityManager em = factory.createEntityManager();	       	    
 	    
 	    // Build and execute SQL-Statement
-	    Query q = em.createQuery(
-	    		"SELECT * " +
-	    		"FROM Appointment " +
-	    		"WHERE date BETWEEN ?1 AND ?2");
+	    TypedQuery<Appointment> q = em.createQuery(
+	    		"SELECT a " +
+	    		"FROM Appointment a " +
+	    		"WHERE a.date>=?1 AND a.date<=?2", Appointment.class);
 	    
-	    q.setParameter(1, calendarToSql(monday));
-	    q.setParameter(2, calendarToSql(sunday));
+	    q.setParameter(1, monday.getTime());
+	    q.setParameter(2, sunday.getTime());
 	    
     	List<Appointment> appointments = q.getResultList();
     	
@@ -45,7 +46,7 @@ public class AppointmentProvider {
 	@SuppressWarnings("unchecked")
 	public List<Appointment> getNextAppointments(){
 		
-		Date date = new Date();
+		Date date = (Date) new java.util.Date();
 		
 		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory("xrapla");
@@ -67,8 +68,14 @@ public class AppointmentProvider {
 	
 	private String calendarToSql(Calendar day)	
 	{			
-		return day.get(Calendar.YEAR) + "-" +
-					day.get(Calendar.MONTH) + "-" +
-					day.get(Calendar.DATE); 
+		String retStr = "";
+		retStr += day.get(Calendar.YEAR) + "-";
+		retStr += (day.get(Calendar.MONTH) < 10) ? "0" : ""; 
+		retStr += day.get(Calendar.MONTH) + "-";
+		retStr += (day.get(Calendar.DATE) < 10) ? "0" : "";
+		retStr += day.get(Calendar.DATE); 
+		
+		System.out.println(retStr);
+		return retStr;
 	}
 }
