@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Group {
@@ -24,6 +25,9 @@ public class Group {
 
 	@OneToMany(mappedBy="group")
 	private List<Appointment> appointments; 
+	
+	@ManyToMany(mappedBy="groups")	
+	private List<Student> students;
 	
 	public Group (){
 	}	
