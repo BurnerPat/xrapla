@@ -17,6 +17,9 @@ public class Group {
 	private int id;
 	
 	private String name;
+	
+	@ManyToOne
+	@JoinColumn(name="COURSE_ID")
 	private Course course;
 
 	@OneToMany(mappedBy="group")

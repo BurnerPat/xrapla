@@ -1,6 +1,9 @@
 package org.xrapla.beans;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Tutor extends User {
@@ -8,6 +11,8 @@ public class Tutor extends User {
 	private String title;
 	private String subject;
 	
+	@OneToMany(mappedBy="tutor")
+	private List<Course> courses;
 	
 	public Tutor(){
 	}
@@ -30,6 +35,16 @@ public class Tutor extends User {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 }
 	
