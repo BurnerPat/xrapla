@@ -1,6 +1,8 @@
 package org.xrapla.classes;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -38,6 +40,33 @@ public class AppointmentProvider {
     	List<Appointment> appointments = q.getResultList();
     	
 	    return appointments;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Appointment> getNextAppointments(){
+		
+		Date date = new Date();
+		
+		EntityManagerFactory factory;		 
+	    factory = Persistence.createEntityManagerFactory("xrapla");
+	    EntityManager em = factory.createEntityManager();
+	    
+	    Query q = em.createQuery(
+	    		"SELECT * " +
+	    		"FROM Appointment" +
+	    		"Where date >= ?1" +
+	    		"LIMIT 2");
+	    
+	    
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    q.setParameter(1, sdf.format(date));
+	    		
+		List<Appointment> appointments = q.getResultList();
+				
+		return appointments;
+		
+		
+		
 	}
 	
 	private String calendarToSql(Calendar day)	
