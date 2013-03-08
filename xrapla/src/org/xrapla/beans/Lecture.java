@@ -1,9 +1,14 @@
 package org.xrapla.beans;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Lecture {
@@ -11,8 +16,13 @@ public class Lecture {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	
+	@ManyToOne
+	@JoinColumn(name="COURSE_ID")
 	private Course course;
-	private Docent docent;
+	
+	@ManyToMany(mappedBy="lectures")
+	private List<Docent> docent;
 
 	public Lecture(){
 	}
@@ -41,11 +51,11 @@ public class Lecture {
 		this.course = course;
 	}
 
-	public Docent getDocent() {
+	public List<Docent> getDocent() {
 		return docent;
 	}
 
-	public void setDocent(Docent docent) {
+	public void setDocent(List<Docent> docent) {
 		this.docent = docent;
 	}
 
