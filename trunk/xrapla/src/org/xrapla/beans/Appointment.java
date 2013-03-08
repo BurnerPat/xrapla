@@ -30,7 +30,7 @@ public class Appointment {
 	
 	@ManyToOne
 	@JoinColumn(name="GROUP_ID")
-	private Group group;
+	private CourseGroup group;
 	
 	public Appointment(){
 	}
@@ -65,11 +65,11 @@ public class Appointment {
 	public void setLecture(Lecture lecture) {
 		this.lecture = lecture;
 	}
-	public Group getGroup() {
+	public CourseGroup getGroup() {
 		return group;
 	}
 	
-	public void setGroup(Group group) {
+	public void setGroup(CourseGroup group) {
 		this.group = group;
 	}
 	
@@ -83,16 +83,16 @@ public class Appointment {
 
 	public String toString(){
 		SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
-		SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(time);
-		cal.add(Calendar.MILLISECOND, duration);
-		
+		cal.add(Calendar.MINUTE, duration);
+				
 		return sdfDate.format(date) 
 				+ " " + sdfTime.format(time) 
-				+ " - " 
-				+ cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) 
-				+ "[" + room + "]" ;
+				+ " Uhr - " 
+				+ sdfTime.format(cal.getTime()) 
+				+ " Uhr [Raum: " + room + "]" ;
 	}
 }
