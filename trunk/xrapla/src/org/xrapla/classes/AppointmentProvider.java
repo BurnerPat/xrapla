@@ -21,13 +21,9 @@ public class AppointmentProvider {
 	    	    
 	    Calendar sunday = monday;
 	    sunday.add(Calendar.DATE, 7);	
-//		return getAppointments(monday, sunday);
-//	}
-//	
-//	
-//	private List<Appointment> getAppointments(Calendar monday, Calendar sunday){		
+	    
 		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory("Appointment");
+	    factory = Persistence.createEntityManagerFactory("xrapla");
 	    EntityManager em = factory.createEntityManager();	       	    
 	    
 	    // Build and execute SQL-Statement
@@ -49,5 +45,7 @@ public class AppointmentProvider {
 				day.get(Calendar.MONTH) + "-" +
 				day.get(Calendar.DATE); 
 	}
+	
+	
 
 }
