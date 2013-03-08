@@ -2,11 +2,13 @@ package org.xrapla.beans;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Tutor extends User {
+@DiscriminatorValue("TUTOR")
+public class Tutor extends User{
 
 	private String title;
 	private String subject;
@@ -16,7 +18,6 @@ public class Tutor extends User {
 	
 	public Tutor(){
 	}
-
 
 	public String getTitle() {
 		return title;
