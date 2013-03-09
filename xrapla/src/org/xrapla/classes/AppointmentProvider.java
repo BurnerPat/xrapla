@@ -79,7 +79,8 @@ public class AppointmentProvider {
 	    	List<Appointment> apps = new ArrayList<Appointment>();
 	    	for(CourseGroup group : groups){
 	    		for(Appointment a : (group.getAppointments())){
-	    			apps.add(a);
+	    			if(apps.size() < 2)
+	    				apps.add(a);
 	    		}
 	    	}	    	
 	    	return apps;	    		    	
@@ -90,7 +91,8 @@ public class AppointmentProvider {
     			
     			for(Lecture lecture : docent.getLectures())
     				for(Appointment app : lecture.getAppointments())
-    					apps.add(app);
+    					if(apps.size() < 2)
+    						apps.add(app);
     			return apps;
     		} else
     			return new ArrayList<Appointment>();
