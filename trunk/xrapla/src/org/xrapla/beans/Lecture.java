@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Lecture {
@@ -23,6 +24,9 @@ public class Lecture {
 	
 	@ManyToMany(mappedBy="lectures")
 	private List<Docent> docent;
+	
+	@OneToMany(mappedBy="lecture")
+	private List<Appointment> appointments; 
 
 	public Lecture(){
 	}
@@ -57,6 +61,14 @@ public class Lecture {
 
 	public void setDocent(List<Docent> docent) {
 		this.docent = docent;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 }
