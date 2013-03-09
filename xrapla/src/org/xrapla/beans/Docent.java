@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("DOCENT")
-public class Docent extends User{	
+public class Docent extends User {	
 	
 	private String title;
 	private String subject;
