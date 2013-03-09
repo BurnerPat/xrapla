@@ -19,8 +19,8 @@ public class Docent extends User{
 	
 	@ManyToMany
 	@JoinTable(name="DOCENT_LECTURE",
-	        joinColumns={ @JoinColumn(name="LECTURE_ID", referencedColumnName="ID")},
-	        inverseJoinColumns={@JoinColumn(name="DOCENT_ID", referencedColumnName="username")})
+	        joinColumns={ @JoinColumn(name="DOCENT_ID", referencedColumnName="username")},
+	        inverseJoinColumns={@JoinColumn(name="LECTURE_ID", referencedColumnName="ID")})
 	private List<Lecture> lectures;
 		
 	public List<Lecture> getLectures() {
