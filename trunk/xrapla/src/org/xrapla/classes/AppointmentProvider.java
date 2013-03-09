@@ -3,6 +3,7 @@ package org.xrapla.classes;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -44,39 +45,73 @@ public class AppointmentProvider {
 	    return appointments;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Appointment> getNextAppointments(){
-		
-		Date date = (Date) new java.util.Date();
 		
 		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
 	    EntityManager em = factory.createEntityManager();
 	    
-	    Query q = em.createQuery(
-	    		"SELECT * " +
-	    		"FROM Appointment" +
-	    		"Where date >= ?1" +
-	    		"LIMIT 2");
-	        
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	    q.setParameter(1, sdf.format(date));
+	    TypedQuery<Appointment> q = em.createQuery(
+	    		"SELECT a " +
+	    		"FROM Appointment a " +
+	    		"WHERE a.date >= CURRENT_DATE ", Appointment.class);
 	    		
-		List<Appointment> appointments = q.getResultList();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		for(Appointment app : q.getResultList())
+		{
+			if(appointments.size() < 2)
+				appointments.add(app);
+			else
+				break;
+		}
 				
 		return appointments;			
 	}
 	
-	private String calendarToSql(Calendar day)	
-	{			
-		String retStr = "";
-		retStr += day.get(Calendar.YEAR) + "-";
-		retStr += (day.get(Calendar.MONTH) < 10) ? "0" : ""; 
-		retStr += day.get(Calendar.MONTH) + "-";
-		retStr += (day.get(Calendar.DATE) < 10) ? "0" : "";
-		retStr += day.get(Calendar.DATE); 
+	public List<Appointment> getNextAppointments(User user){				
 		
-		System.out.println(retStr);
-		return retStr;
+		EntityManagerFactory factory;		 
+	    factory = Persistence.createEntityManagerFactory("xrapla");
+	    EntityManager em = factory.createEntityManager();
+	    
+	    if(user instanceof Student){
+	    	Student student = (Student) user;
+	    	List<CourseGroup> groups = student.getGroups();
+	    	List<Appointment> apps = new ArrayList<Appointment>();
+	    	for(CourseGroup group : groups){
+	    		for(Appointment a : (group.getAppointments())){
+	    			apps.add(a);
+	    		}
+	    	}	    	
+	    	return apps;	    		    	
+	    } else
+    		if(user instanceof Docent){
+    			Docent docent = (Docent) user;
+    			List<Appointment> apps = new ArrayList<Appointment>();
+    			
+    			for(Lecture lecture : docent.getLectures())
+    				for(Appointment app : lecture.getAppointments())
+    					apps.add(app);
+    			return apps;
+    		} else
+    			return new ArrayList<Appointment>();
+	    
+	    		
+	    /*TypedQuery<Appointment> q = em.createQuery(
+	    		"SELECT a " +
+	    		"FROM Appointment a " +
+	    		"WHERE a.date >= CURRENT_DATE AND " +
+	    		"", Appointment.class);
+	    		
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		for(Appointment app : q.getResultList())
+		{
+			if(appointments.size() < 2)
+				appointments.add(app);
+			else
+				break;
+		}
+				
+		return appointments;*/			
 	}
 }
