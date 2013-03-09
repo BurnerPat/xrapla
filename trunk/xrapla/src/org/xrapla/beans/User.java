@@ -1,19 +1,16 @@
 package org.xrapla.beans;
 
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="USER_TYPE")
-public class User {
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING,name="USER_TYPE")
+public abstract class User {
 
 	@Id	
 	private String username;	

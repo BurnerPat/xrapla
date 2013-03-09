@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("TUTOR")
-public class Tutor extends User{
+public class Tutor extends User {
 
 	private String title;
 	private String subject;
