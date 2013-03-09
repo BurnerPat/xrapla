@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.xrapla.Constants;
 import org.xrapla.beans.*;
 
 public class AppointmentProvider {
@@ -26,7 +27,7 @@ public class AppointmentProvider {
 	    sunday.add(Calendar.DATE, 7);		    
 	    
 		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory("xrapla");
+	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
 	    EntityManager em = factory.createEntityManager();	       	    
 	    
 	    // Build and execute SQL-Statement
@@ -49,7 +50,7 @@ public class AppointmentProvider {
 		Date date = (Date) new java.util.Date();
 		
 		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory("xrapla");
+	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
 	    EntityManager em = factory.createEntityManager();
 	    
 	    Query q = em.createQuery(
