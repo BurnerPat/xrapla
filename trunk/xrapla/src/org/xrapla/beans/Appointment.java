@@ -25,7 +25,7 @@ public class Appointment {
 	private String category;
 	
 	@ManyToOne
-	@JoinColumn(name="LECTURE_ID")
+	@JoinColumn(name="LECTURE_ID")	
 	private Lecture lecture;	
 	
 	@ManyToOne
