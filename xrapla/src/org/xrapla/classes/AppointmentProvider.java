@@ -70,9 +70,9 @@ public class AppointmentProvider {
 	
 	public List<Appointment> getNextAppointments(User user){				
 		
-		EntityManagerFactory factory;		 
+		/*EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();
+	    EntityManager em = factory.createEntityManager();*/
 	    
 	    if(user instanceof Student){
 	    	Student student = (Student) user;
@@ -96,24 +96,6 @@ public class AppointmentProvider {
     						apps.add(app);
     			return apps;
     		} else
-    			return new ArrayList<Appointment>();
-	    
-	    		
-	    /*TypedQuery<Appointment> q = em.createQuery(
-	    		"SELECT a " +
-	    		"FROM Appointment a " +
-	    		"WHERE a.date >= CURRENT_DATE AND " +
-	    		"", Appointment.class);
-	    		
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		for(Appointment app : q.getResultList())
-		{
-			if(appointments.size() < 2)
-				appointments.add(app);
-			else
-				break;
-		}
-				
-		return appointments;*/			
+    			return new ArrayList<Appointment>();		
 	}
 }
