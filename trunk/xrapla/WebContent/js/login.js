@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	$("#submit").click(function() {
+		$("#error").slideUp("fast");
+		
 		var user = $("#username").val();
 		var pass = $("#password").val();
 		

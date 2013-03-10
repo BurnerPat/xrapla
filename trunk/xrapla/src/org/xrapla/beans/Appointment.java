@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@IdClass(AppointmentId.class)
 public class Appointment {
 	
 	@Transient
