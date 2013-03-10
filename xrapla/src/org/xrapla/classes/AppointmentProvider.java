@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -68,11 +69,7 @@ public class AppointmentProvider {
 		return appointments;			
 	}
 	
-	public List<Appointment> getNextAppointments(User user){				
-		
-		/*EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();*/
+	public List<Appointment> getNextAppointments(User user){						
 	    
 	    if(user instanceof Student){
 	    	Student student = (Student) user;
@@ -97,5 +94,29 @@ public class AppointmentProvider {
     			return apps;
     		} else
     			return new ArrayList<Appointment>();		
+	}
+	
+	public void insert(Appointment appointment){
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);		
+		EntityManager em = factory.createEntityManager();
+		
+		em.getTransaction().begin();
+		em.persist(appointment);
+		em.getTransaction().commit();
+		
+		em.close();
+	}
+	
+	public void remove(Appointment appointment){
+		
+	}	
+		
+	public Appointment update(Appointment appointment){		
+	    /*Appointment app = em.find(Appointment.class, new AppointmentId());
+	    if (emp != null) {
+	      emp.setSalary(emp.getSalary() + raise);
+	    }
+	    return emp;	*/
+		return appointment;
 	}
 }
