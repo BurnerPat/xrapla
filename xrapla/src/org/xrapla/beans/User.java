@@ -20,7 +20,7 @@ public abstract class User {
 	private String email;	
 		
 	
-	public User(){		
+	public User() {		
 	}
 	
 	public String getUsername() {
