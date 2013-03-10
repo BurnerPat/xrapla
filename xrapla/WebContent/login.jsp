@@ -7,12 +7,13 @@
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="css/login.css"/>
 	<script src="js/jquery.js"></script>
+	<script src="js/jquery.spinner.js"></script>
 	<script src="js/login.js"></script>
 </head>
 <body>
 	<div id="login_container">
 		<h1>Welcome.</h1>
-		<div class="widget">
+		<form id="login" class="widget">
 			<div class="row">
 				Username: <input id="username" type="text">
 			</div>
@@ -21,6 +22,6 @@
 			</div>
 			<div id="error"></div>
 			<input id="submit" type="submit" class="button" value="Login">
-		</div>
+		</form>
 	</div>
 </body>

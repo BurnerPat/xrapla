@@ -15,7 +15,7 @@ public class UserHandler {
 	}
 	
 	public boolean isLoggedIn() {
-		return (session.getAttribute(USER) != null);
+		return (getUser() != null);
 	}
 	
 	public boolean login(String username, String password) {

@@ -8,6 +8,7 @@
 
 #login_container .widget {
 	margin: 0 0 0 -16px;
+	display: inline-block;
 }
 
 div.row {
