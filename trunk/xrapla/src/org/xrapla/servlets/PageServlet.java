@@ -36,7 +36,7 @@ public class PageServlet extends HttpServlet {
 			}
 		}
 		else {
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			response.sendRedirect("login.jsp");
 		}
 	}
 
