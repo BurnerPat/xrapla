@@ -125,17 +125,9 @@ public class RoomValidator {
 				freeRooms.remove(j+1);
 				freeRooms.add(j+1, freeRooms.get(j));
 				j--;
-				System.out.println("[");
-				for(Room r : freeRooms)
-					System.out.println(r + ",");
-				System.out.println("]");
 			}
 			freeRooms.remove(j+1);
 			freeRooms.add(j+1, room);
-			System.out.print("[");
-			for(Room r : freeRooms)
-				System.out.print(r + ",");
-			System.out.print("]\n");
 		}
 		return freeRooms;
 	}
