@@ -14,7 +14,9 @@ public class Appointment {
 	public static final String CATEGORY_DEFAULT = "default";
 	
 	@Id	
-	private String room;
+	@ManyToOne
+	@JoinColumn(name="Room_ID")
+	private Room room;
 	@Id
 	@Temporal(TemporalType.DATE)
 	private Date date;
@@ -36,10 +38,10 @@ public class Appointment {
 	public Appointment(){
 	}
 	
-	public String getRoom() {
+	public Room getRoom() {
 		return room;
 	}
-	public void setRoom(String room) {
+	public void setRoom(Room room) {
 		this.room = room;
 	}
 	public Date getDate() {
