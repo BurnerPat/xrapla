@@ -7,7 +7,7 @@ public class AppointmentId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String room;
+	private Room room;
 	private Date date;
 	private Date time;
 	
@@ -15,13 +15,13 @@ public class AppointmentId implements Serializable {
 		
 	}
 	
-	public AppointmentId(String room, Date date, Date time) {
+	public AppointmentId(Room room, Date date, Date time) {
 		this.room = room;
 		this.date = date;
 		this.time = time;
 	}
 
-	public String getRoom() {
+	public Room getRoom() {
 		return room;
 	}
 
@@ -42,7 +42,7 @@ public class AppointmentId implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof AppointmentId) {
 			AppointmentId o = (AppointmentId)obj;
-			return (room.equals(o.getRoom()) && date.equals(o.getDate()) && time.equals(o.getTime()));
+			return (room.getNumber() == o.getRoom().getNumber() && date.equals(o.getDate()) && time.equals(o.getTime()));
 		}
 		else {
 			return false;
