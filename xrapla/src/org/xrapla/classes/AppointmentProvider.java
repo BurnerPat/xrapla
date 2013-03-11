@@ -108,7 +108,14 @@ public class AppointmentProvider {
 	}
 	
 	public void remove(Appointment appointment){
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);		
+		EntityManager em = factory.createEntityManager();
 		
+		em.getTransaction().begin();
+		em.remove(appointment);
+		em.getTransaction().commit();
+		
+		em.close();
 	}	
 		
 	public Appointment update(Appointment appointment){		
