@@ -15,14 +15,19 @@ public class Appointment {
 	
 	@Id	
 	@ManyToOne
-	@JoinColumn(name="Room_ID")
+	@JoinColumn(name="ROOM_ID")	
 	private Room room;
+	
 	@Id
 	@Temporal(TemporalType.DATE)
 	private Date date;
+	
 	@Id
 	@Temporal(TemporalType.TIME)
 	private Date time;
+	
+	/*@EmbeddedId
+	private AppointmentId id;*/
 	
 	private int duration;	
 	private String category;
@@ -38,24 +43,24 @@ public class Appointment {
 	public Appointment(){
 	}
 	
+	//@Transient
 	public Room getRoom() {
+		//return id.getRoom();
 		return room;
 	}
-	public void setRoom(Room room) {
-		this.room = room;
-	}
+	
+	//@Transient
 	public Date getDate() {
+		//return id.getDate();
 		return date;
 	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
+	//@Transient
 	public Date getTime() {
+		//return id.getTime();
 		return time;
 	}
-	public void setTime(Date time) {
-		this.time = time;
-	}
+	
 	public int getDuration() {
 		return duration;
 	}
@@ -83,6 +88,14 @@ public class Appointment {
 	public void setCategory(String category) {
 		this.category = category;
 	}	
+
+	/*public AppointmentId getId() {
+		return id;
+	}
+
+	public void setId(AppointmentId id) {
+		this.id = id;
+	}*/
 
 	public String toString(){
 		SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
