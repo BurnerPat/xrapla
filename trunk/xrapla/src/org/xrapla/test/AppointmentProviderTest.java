@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import org.xrapla.beans.Appointment;
+import org.xrapla.beans.Room;
 import org.xrapla.beans.User;
 import org.xrapla.classes.AppointmentProvider;
 
@@ -25,7 +26,7 @@ public class AppointmentProviderTest {
 		
 		System.out.println("");
 		
-		// nächsten Termine für User
+		// nächsten Termine für alle User
 		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory("xrapla");
 	    EntityManager em = factory.createEntityManager();
@@ -35,13 +36,24 @@ public class AppointmentProviderTest {
 	    		
 	    List<User> users = q.getResultList();
 		
-	    for(User user : users){
-		//User user = new UserProvider().getUser("annkitkat", "123456");
+	    for(User user : users){		
 		System.out.println("User: " + user + "\n");
 			List<Appointment> nextEvents = prov.getNextAppointments(user);
 			System.out.println("Nächsten 2 Termine (annkitkat):");
 			for(Appointment ap : nextEvents)
 				System.out.println(ap);
 		}
+	    System.out.println();
+	    
+	    // Termine pro Woche pro Raum
+	    Room room = new Room();
+	    room.setNumber(474);
+	    room.setWing('A');
+	    List<Appointment> appointmentsPerRoom = prov.getAppointments(1, 2013, room);
+		System.out.println("Termine in Woche 1 des Jahres 2013 in Raum A474:");
+		for(Appointment ap : appointmentsPerRoom)
+			System.out.println(ap);
+		
+		System.out.println();
 	}
 }
