@@ -6,12 +6,12 @@
 	<meta charset="utf-8"/>
 	
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-	<link rel="stylesheet" href="css/style.css"/>
-	<link rel="stylesheet" href="css/login.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"/>
 	
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.spinner.js"></script>
-	<script src="js/login.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.spinner.js"></script>
+	<script src="${pageContext.request.contextPath}/js/login.js"></script>
 </head>
 <body>
 	<script>
