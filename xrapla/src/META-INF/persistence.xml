@@ -13,6 +13,7 @@
     <class>org.xrapla.beans.Student</class>
     <class>org.xrapla.beans.Tutor</class>
     <class>org.xrapla.beans.User</class>
+    <class>org.xrapla.beans.Room</class>
        
     <properties>    
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
