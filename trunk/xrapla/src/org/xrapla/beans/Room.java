@@ -24,4 +24,8 @@ public class Room {
 	public void setWing(char wing) {
 		this.wing = wing;
 	}	
+	
+	public String toString(){
+		return "" + wing + number;
+	}
 }
