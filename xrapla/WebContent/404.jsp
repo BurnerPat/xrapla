@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <head>
 	<title>CoolRapla</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-	<link rel="stylesheet" href="css/style.css"/>
-	<link rel="stylesheet" href="css/error.css"/>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/error.css"/>
 </head>
 <body>
 	<div id="error_container">

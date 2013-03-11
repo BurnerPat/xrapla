@@ -4,7 +4,8 @@
 <head>
 	<title>CoolRapla</title>
 	<meta charset="utf-8"/>
-	<link rel="stylesheet" href="css/style.css"/>
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
 	<h1>Heutige Vorlesungen</h1>
