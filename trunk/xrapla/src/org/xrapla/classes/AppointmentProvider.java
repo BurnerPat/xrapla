@@ -18,6 +18,35 @@ import org.xrapla.Constants;
 import org.xrapla.beans.*;
 
 public class AppointmentProvider {
+	
+	public List<Appointment> getAppointments(int weekOfYear, int year, Room room){
+		Calendar monday = new GregorianCalendar();	    
+	    monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);	 	    
+	    	    
+	    Calendar sunday = new GregorianCalendar();
+	    sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
+	    sunday.add(Calendar.DATE, 7);
+	    
+	    EntityManagerFactory factory;		 
+	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+	    EntityManager em = factory.createEntityManager();	       	    
+	    
+	    // Build and execute SQL-Statement
+	    TypedQuery<Appointment> q = em.createQuery(
+	    		"SELECT a " +
+	    		"FROM Appointment a " +
+	    		"WHERE a.date >= ?1 " +
+	    		"AND a.date <= ?2 " +
+	    		"AND a.room = ?3", Appointment.class);
+	    
+	    q.setParameter(1, monday.getTime());
+	    q.setParameter(2, sunday.getTime());
+	    q.setParameter(3, room);
+	    
+    	List<Appointment> appointments = q.getResultList();
+    	
+	    return appointments;
+	}
 			
 	public List<Appointment> getAppointments(int weekOfYear, int year)
 	{			    		
@@ -46,6 +75,7 @@ public class AppointmentProvider {
 	    return appointments;
 	}
 	
+	@Deprecated
 	public List<Appointment> getNextAppointments(){
 		
 		EntityManagerFactory factory;		 
