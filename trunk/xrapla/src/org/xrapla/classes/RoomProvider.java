@@ -20,7 +20,7 @@ public class RoomProvider {
 	    // Build and execute SQL-Statement
 	    TypedQuery<Room> q = em.createQuery(
 	    		"SELECT r " +
-	    		"FROM room r", Room.class);
+	    		"FROM Room r", Room.class);
 	    	    
     	List<Room> rooms = q.getResultList();
     	
