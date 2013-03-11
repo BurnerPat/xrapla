@@ -2,7 +2,7 @@ USE xrapla;
 
 INSERT INTO `user` (`USERNAME`,`EMAIL`,`FIRSTNAME`,`LASTNAME`,`PASSWORD`) VALUES ('annkitkat','eioqjeopwj','Annika','Meyer','123456');
 INSERT INTO `user` (`USERNAME`,`EMAIL`,`FIRSTNAME`,`LASTNAME`,`PASSWORD`) VALUES ('burnerpat','woihoie','Patrick','Jackes','9876');
-INSERT INTO `user` (`USERNAME`,`EMAIL`,`FIRSTNAME`,`LASTNAME`,`PASSWORD`) VALUES ('gerkus','ipejoiwe','Markus','Geissel','6574');
+INSERT INTO `user` (`USERNAME`,`EMAIL`,`FIRSTNAME`,`LASTNAME`,`PASSWORD`) VALUES ('gerkus','ipejoiwe','Markus','Geissel','asdf');
 
 INSERT INTO `docent` (`USERNAME`,`SUBJECT`,`TITLE`) VALUES ('burnerpat','Informatik','Dr. PhD');
 
