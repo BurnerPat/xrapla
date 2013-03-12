@@ -1,7 +1,7 @@
  package org.xrapla.classes;
 
-import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -12,7 +12,13 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import org.xrapla.Constants;
-import org.xrapla.beans.*;
+import org.xrapla.beans.Appointment;
+import org.xrapla.beans.CourseGroup;
+import org.xrapla.beans.Docent;
+import org.xrapla.beans.Lecture;
+import org.xrapla.beans.Room;
+import org.xrapla.beans.Student;
+import org.xrapla.beans.User;
 
 public class AppointmentProvider {
 
@@ -61,8 +67,10 @@ public class AppointmentProvider {
 		EntityManager em = factory.createEntityManager();
 
 		// Build and execute SQL-Statement
-		TypedQuery<Appointment> q = em.createQuery("SELECT a "
-				+ "FROM Appointment a " + "WHERE a.date>=?1 AND a.date<=?2",
+		TypedQuery<Appointment> q = em.createQuery(
+				"SELECT a " + 
+				"FROM Appointment a " + 
+				"WHERE a.date>=?1 AND a.date<=?2",
 				Appointment.class);
 
 		q.setParameter(1, monday.getTime());
@@ -75,7 +83,7 @@ public class AppointmentProvider {
 		return appointments;
 	}
 
-	public List<Appointment> getNextAppointments(User user) {
+	public List<Appointment> getNextTwoAppointments(User user) {
 
 		if (user instanceof Student) {
 			Student student = (Student) user;
@@ -85,22 +93,18 @@ public class AppointmentProvider {
 				for (Appointment a : (group.getAppointments())) {					
 						apps.add(a);
 				}
-			}
-			
-			
-			
-			return apps;
+			}							
+			return sort(apps).subList(0, 2);
 		} else if (user instanceof Docent) {
 			Docent docent = (Docent) user;
 			List<Appointment> apps = new ArrayList<Appointment>();
 
 			for (Lecture lecture : docent.getLectures())
-				for (Appointment app : lecture.getAppointments())
-					if (apps.size() < 2)
-						apps.add(app);
-			return apps;
+				for (Appointment app : lecture.getAppointments())					
+					apps.add(app);
+			return sort(apps).subList(0, 2);
 		} else
-			return new ArrayList<Appointment>();
+			return null;
 	}
 
 	public void insert(Appointment appointment) {
