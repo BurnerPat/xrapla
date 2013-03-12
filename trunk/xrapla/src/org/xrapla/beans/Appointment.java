@@ -3,7 +3,15 @@ package org.xrapla.beans;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @IdClass(AppointmentId.class)
@@ -88,14 +96,13 @@ public class Appointment {
 	public void setCategory(String category) {
 		this.category = category;
 	}	
-
-	/*public AppointmentId getId() {
-		return id;
+	
+	@Transient
+	public Date getDateTime(){
+		Date dateTime = date;
+		dateTime.setTime(time.getTime());
+		return dateTime;
 	}
-
-	public void setId(AppointmentId id) {
-		this.id = id;
-	}*/
 
 	public String toString(){
 		SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
