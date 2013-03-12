@@ -178,8 +178,6 @@ public class AppointmentProvider {
 	    	return apps.subList(0, 2);	    		 
 		}else
 			return null;
-				
-			}
 		
 	}
 	
