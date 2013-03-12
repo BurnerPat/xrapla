@@ -2,16 +2,21 @@ package org.xrapla.beans;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="room")
 public class Room {
 	
 	@Id
+	@Column(name="number")
 	int number;
-		
+	
+	@Column(name="wing")
 	char wing;
 	
 	@OneToMany(mappedBy="room")

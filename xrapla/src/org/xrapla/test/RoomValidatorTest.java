@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-
 import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.Room;
