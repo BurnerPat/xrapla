@@ -14,10 +14,7 @@ public class Tutor extends User {
 	private String subject;
 	
 	@OneToMany(mappedBy="tutor")
-	private List<Course> courses;
-	
-	public Tutor(){
-	}
+	private List<Course> ownedCourses;	
 
 	public String getTitle() {
 		return title;
@@ -39,13 +36,13 @@ public class Tutor extends User {
 	}
 
 
-	public List<Course> getCourses() {
-		return courses;
+	public List<Course> getOwnedCourses() {
+		return ownedCourses;
 	}
 
 
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
+	public void setOwnedCourses(List<Course> ownedCourses) {
+		this.ownedCourses = ownedCourses;
 	}
 }
 	
