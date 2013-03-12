@@ -1,17 +1,13 @@
 package org.xrapla.classes;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.xrapla.Constants;

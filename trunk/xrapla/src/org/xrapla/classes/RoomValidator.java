@@ -1,16 +1,12 @@
 package org.xrapla.classes;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
-import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.Room;
 
@@ -37,9 +33,14 @@ public class RoomValidator {
 	    q.setParameter(1, room);
 	    q.setParameter(2, date);
 	    q.setParameter(3, time);
-	    		
-		Appointment appointment = q.getSingleResult();
-		return (appointment == null);
+	    
+	    try {
+			Appointment appointment = q.getSingleResult();
+			return (appointment == null);
+	    }
+	    catch (NoResultException ex) {
+	    	return true;
+	    }
 	}
 	
 	public Room findNearestAvailableRoom(Room room, Date date, Date time){

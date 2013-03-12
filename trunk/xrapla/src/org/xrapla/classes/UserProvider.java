@@ -1,9 +1,6 @@
 package org.xrapla.classes;
 
-import java.util.List;
-
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
