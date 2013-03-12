@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.Room;
+import org.xrapla.beans.Student;
 import org.xrapla.beans.User;
 import org.xrapla.classes.AppointmentProvider;
 
@@ -18,42 +19,70 @@ public class AppointmentProviderTest {
 		
 		AppointmentProvider prov = new AppointmentProvider();
 		
-		// Termine pro Woche
-		List<Appointment> appointments = prov.getAppointments(1, 2013);
-		System.out.println("Termine in Woche 1 des Jahres 2013:");
-		for(Appointment ap : appointments)
-			System.out.println(ap);
-		
-		System.out.println("");
-		
-		// nächsten Termine für alle User
 		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory("xrapla");
 	    EntityManager em = factory.createEntityManager();
 	    TypedQuery<User> q = em.createQuery(
 	    		"SELECT a " +
-	    		"FROM User a", User.class);
+	    		"FROM User a " +
+	    		"WHERE TYPE(a) = ?1", User.class);
+	    
+	    q.setParameter(1, Student.class);
 	    		
 	    List<User> users = q.getResultList();
+	    Student user = null;
+	    for(User us : users){
+	    	if(us instanceof Student){
+	    		user = (Student) us;
+	    		break;
+	    	}
+	    }
 		
-	    for(User user : users){		
-		System.out.println("User: " + user + "\n");
-			List<Appointment> nextEvents = prov.getNextAppointments(user);
-			System.out.println("Nächsten 2 Termine (annkitkat):");
-			for(Appointment ap : nextEvents)
-				System.out.println(ap);
-		}
-	    System.out.println();
+		// Termine pro Woche
+		List<Appointment> appointmentsPerUser = prov.getAppointments(1, 2013, user);		
+		
+		// nächsten Termine für alle User					    		
+		List<Appointment> nextEvents = prov.getNextTwoAppointments(user);
 	    
 	    // Termine pro Woche pro Raum
 	    Room room = new Room();
 	    room.setNumber(474);
 	    room.setWing('A');
-	    List<Appointment> appointmentsPerRoom = prov.getAppointments(1, 2013, room);
-		System.out.println("Termine in Woche 1 des Jahres 2013 in Raum A474:");
-		for(Appointment ap : appointmentsPerRoom)
-			System.out.println(ap);
+	    List<Appointment> appointmentsPerRoom = prov.getAppointments(11, 2013, room);
+		
+		// Nächsten 3 Klausuren
+		List<Appointment> exams = prov.getExams(user);				
+		
+		// Anzeige
+		
+		System.out.println("Termine in Woche 1 des Jahres 2013 für " + user);
+		if(appointmentsPerUser != null){
+			for(Appointment ap : appointmentsPerUser)
+				System.out.println(ap);
+		}
 		
 		System.out.println();
+		
+		System.out.println("Nächsten 2 Termine für " + user);
+		if(appointmentsPerUser != null){
+			for(Appointment ap : nextEvents)
+				System.out.println(ap);
+		}
+		
+	    System.out.println();
+		
+		System.out.println("Termine in Woche 11 des Jahres 2013 in Raum " + room);
+		if(appointmentsPerUser != null){
+			for(Appointment ap : appointmentsPerRoom)
+				System.out.println(ap);
+		}
+		
+		System.out.println();
+		
+		System.out.println("Nächste Klausuren: ");
+		if(appointmentsPerUser != null){
+			for(Appointment exam : appointmentsPerRoom)
+				System.out.println(exam);
+		}
 	}
 }
