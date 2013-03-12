@@ -99,7 +99,7 @@ public class RoomValidator {
 				}
 			}			
 		}		
-						
+		em.close();
 		return rooms;
 	}
 	
