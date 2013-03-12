@@ -1,4 +1,4 @@
-package org.xrapla.classes;
+ package org.xrapla.classes;
 
 import java.util.Calendar;
 import java.util.ArrayList;
@@ -68,7 +68,8 @@ public class AppointmentProvider {
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
 	    		"FROM Appointment a " +
-	    		"WHERE a.date>=?1 AND a.date<=?2", Appointment.class);
+	    		"WHERE a.date>=?1 AND a.date<=?2 " +
+	    		"ORDER BY a.date" , Appointment.class);
 	    
 	    q.setParameter(1, monday.getTime());
 	    q.setParameter(2, sunday.getTime());
@@ -159,4 +160,27 @@ public class AppointmentProvider {
 	    return emp;	*/
 		return appointment;
 	}
+	
+	public List<Appointment> getExams(User user){
+		
+		if(user instanceof Student){
+			Student student = (Student) user;
+	    	List<CourseGroup> groups = student.getGroups();
+	    	List<Appointment> apps = new ArrayList<Appointment>();
+	    	for(CourseGroup group : groups){
+	    		for(Appointment a : (group.getAppointments())){
+	    			if(a.getCategory()=="exam")
+	    				apps.add(a);
+	    		}
+	    	}
+	    	apps = sort(apps);
+	    	
+	    	return apps.subList(0, 2);	    		 
+		}else
+			return null;
+				
+			}
+		
+	}
+	
 }
