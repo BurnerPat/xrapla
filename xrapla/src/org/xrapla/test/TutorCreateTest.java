@@ -21,7 +21,7 @@ public class TutorCreateTest {
 		myTutor.setEmail("spam@example.com");
 		myTutor.setFirstname("Andreas");
 		myTutor.setLastname("Nonym");
-		myTutor.setCourses(new LinkedList<Course>());
+		myTutor.setOwnedCourses(new LinkedList<Course>());
 		myTutor.setPassword("password");
 		myTutor.setSubject("Java-Programmierung");
 		myTutor.setUsername("anonym");
