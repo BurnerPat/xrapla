@@ -23,8 +23,10 @@ public class RoomProvider {
 				Room.class);
 		try {
 			List<Room> rooms = q.getResultList();
+			em.close();
 			return rooms;
 		} catch(NoResultException ex) {
+			em.close();
 			return null;
 		}
 	}

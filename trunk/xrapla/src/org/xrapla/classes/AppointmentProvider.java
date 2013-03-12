@@ -43,8 +43,10 @@ public class AppointmentProvider {
 	    
 	    try {
 	    	List<Appointment> appointments = q.getResultList();
+	    	em.close();
 	    	return appointments;
 	    } catch(NoResultException ex) {
+	    	em.close();
 	    	return null;
 	    }
 	}
