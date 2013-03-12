@@ -15,34 +15,30 @@ import org.xrapla.Constants;
 import org.xrapla.beans.*;
 
 public class AppointmentProvider {
-	
-	public List<Appointment> getAppointments(int weekOfYear, int year, Room room){
-		Calendar monday = new GregorianCalendar();	    
-	    monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);	 	    
-	    	    
-	    Calendar sunday = new GregorianCalendar();
-	    sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
-	    sunday.add(Calendar.DATE, 7);
-	    
-	    EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();	       	    
-	    
-	    // Build and execute SQL-Statement
-	    TypedQuery<Appointment> q = em.createQuery(
-	    		"SELECT a " +
-	    		"FROM Appointment a " +
-	    		"WHERE a.date >= ?1 " +
-	    		"AND a.date <= ?2 " +
-	    		"AND a.room = ?3", Appointment.class);
-	    
-	    q.setParameter(1, monday.getTime());
-	    q.setParameter(2, sunday.getTime());
-	    q.setParameter(3, room);
-	    
-	    
-	    try {
-	    	List<Appointment> appointments = q.getResultList();
+
+	public List<Appointment> getAppointments(int weekOfYear, int year, Room room) {
+		Calendar monday = new GregorianCalendar();
+		monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
+
+		Calendar sunday = new GregorianCalendar();
+		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
+		sunday.add(Calendar.DATE, 7);
+
+		EntityManagerFactory factory;
+		factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+
+		// Build and execute SQL-Statement
+		TypedQuery<Appointment> q = em.createQuery("SELECT a "
+				+ "FROM Appointment a " + "WHERE a.date >= ?1 "
+				+ "AND a.date <= ?2 " + "AND a.room = ?3", Appointment.class);
+
+		q.setParameter(1, monday.getTime());
+		q.setParameter(2, sunday.getTime());
+		q.setParameter(3, room);		
+		
+		try {
+			List<Appointment> appointments = q.getResultList();
 	    	em.close();
 	    	return appointments;
 	    } catch(NoResultException ex) {
@@ -50,114 +46,92 @@ public class AppointmentProvider {
 	    	return null;
 	    }
 	}
-			
-	public List<Appointment> getAppointments(int weekOfYear, int year)
-	{			    		
-	    Calendar monday = new GregorianCalendar();	    
-	    monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);	 	    
-	    	    
-	    Calendar sunday = new GregorianCalendar();
-	    sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
-	    sunday.add(Calendar.DATE, 7);		    
-	    
-		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();	       	    
-	    
-	    // Build and execute SQL-Statement
-	    TypedQuery<Appointment> q = em.createQuery(
-	    		"SELECT a " +
-	    		"FROM Appointment a " +
-	    		"WHERE a.date>=?1 AND a.date<=?2 " +
-	    		"ORDER BY a.date" , Appointment.class);
-	    
-	    q.setParameter(1, monday.getTime());
-	    q.setParameter(2, sunday.getTime());
-	    
-    	List<Appointment> appointments = q.getResultList();
-    	
-	    return appointments;
-	}
-	
-	@Deprecated
-	public List<Appointment> getNextAppointments(){
-		
-		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();
-	    
-	    TypedQuery<Appointment> q = em.createQuery(
-	    		"SELECT a " +
-	    		"FROM Appointment a " +
-	    		"WHERE a.date >= CURRENT_DATE ", Appointment.class);
-	    		
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		for(Appointment app : q.getResultList())
-		{
-			if(appointments.size() < 2)
-				appointments.add(app);
-			else
-				break;
-		}
-				
-		return appointments;			
-	}
-	
-	public List<Appointment> getNextAppointments(User user){						
-	    
-	    if(user instanceof Student){
-	    	Student student = (Student) user;
-	    	List<CourseGroup> groups = student.getGroups();
-	    	List<Appointment> apps = new ArrayList<Appointment>();
-	    	for(CourseGroup group : groups){
-	    		for(Appointment a : (group.getAppointments())){
-	    			if(apps.size() < 2)
-	    				apps.add(a);
-	    		}
-	    	}	    	
-	    	return apps;	    		    	
-	    } else
-    		if(user instanceof Docent){
-    			Docent docent = (Docent) user;
-    			List<Appointment> apps = new ArrayList<Appointment>();
-    			
-    			for(Lecture lecture : docent.getLectures())
-    				for(Appointment app : lecture.getAppointments())
-    					if(apps.size() < 2)
-    						apps.add(app);
-    			return apps;
-    		} else
-    			return new ArrayList<Appointment>();		
-	}
-	
-	public void insert(Appointment appointment){
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);		
+
+	public List<Appointment> getAppointments(int weekOfYear, int year, User user) {
+		Calendar monday = new GregorianCalendar();
+		monday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
+
+		Calendar sunday = new GregorianCalendar();
+		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
+		sunday.add(Calendar.DATE, 7);
+
+		EntityManagerFactory factory;
+		factory = Persistence
+				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
-		
+
+		// Build and execute SQL-Statement
+		TypedQuery<Appointment> q = em.createQuery("SELECT a "
+				+ "FROM Appointment a " + "WHERE a.date>=?1 AND a.date<=?2",
+				Appointment.class);
+
+		q.setParameter(1, monday.getTime());
+		q.setParameter(2, sunday.getTime());
+
+		List<Appointment> appointments = q.getResultList();
+
+		em.close();
+
+		return appointments;
+	}
+
+	public List<Appointment> getNextAppointments(User user) {
+
+		if (user instanceof Student) {
+			Student student = (Student) user;
+			List<CourseGroup> groups = student.getGroups();
+			List<Appointment> apps = new ArrayList<Appointment>();
+			for (CourseGroup group : groups) {
+				for (Appointment a : (group.getAppointments())) {					
+						apps.add(a);
+				}
+			}
+			
+			
+			
+			return apps;
+		} else if (user instanceof Docent) {
+			Docent docent = (Docent) user;
+			List<Appointment> apps = new ArrayList<Appointment>();
+
+			for (Lecture lecture : docent.getLectures())
+				for (Appointment app : lecture.getAppointments())
+					if (apps.size() < 2)
+						apps.add(app);
+			return apps;
+		} else
+			return new ArrayList<Appointment>();
+	}
+
+	public void insert(Appointment appointment) {
+		EntityManagerFactory factory = Persistence
+				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+
 		em.getTransaction().begin();
 		em.persist(appointment);
 		em.getTransaction().commit();
-		
+
 		em.close();
 	}
-	
-	public void remove(Appointment appointment){
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);		
+
+	public void remove(Appointment appointment) {
+		EntityManagerFactory factory = Persistence
+				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
-		
+
 		em.getTransaction().begin();
 		em.remove(appointment);
 		em.getTransaction().commit();
-		
+
 		em.close();
-	}	
-		
-	public Appointment update(Appointment appointment){		
-	    /*Appointment app = em.find(Appointment.class, new AppointmentId());
-	    if (emp != null) {
-	      emp.setSalary(emp.getSalary() + raise);
-	    }
-	    return emp;	*/
+	}
+
+	public Appointment update(Appointment appointment) {
+		/*
+		 * Appointment app = em.find(Appointment.class, new AppointmentId()); if
+		 * (emp != null) { emp.setSalary(emp.getSalary() + raise); } return emp;
+		 */
 		return appointment;
 	}
 	
@@ -181,4 +155,22 @@ public class AppointmentProvider {
 		
 	}
 	
+	private List<Appointment> sort(List<Appointment> appointments) {
+		for (int i=1; i <= appointments.size(); i++) {
+			Appointment appoinment = appointments.get(i);
+			int j = i - 1;
+			while (j >= 0 && compare(appoinment, appointments.get(j)) < 0) {
+				appointments.remove(j+1);
+				appointments.add(j+1, appointments.get(j));
+				j--;
+			}
+			appointments.remove(j+1);
+			appointments.add(j+1, appoinment);			
+		}
+		return appointments;
+	}
+	
+	private int compare(Appointment app1, Appointment app2){
+		return app1.getDate().compareTo(app2.getDate());
+	}
 }
