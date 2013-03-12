@@ -14,6 +14,9 @@ INSERT INTO `tutor` (`USERNAME`,`SUBJECT`,`TITLE`) VALUES ('gerkus','Projektleit
 INSERT INTO `course` (`ID`,`NAME`,`TUTOR_ID`) VALUES (1,'WWI11B2','gerkus');
 
 INSERT INTO `student` (`USERNAME`,`NUMBER`,`COURSE_ID`) VALUES ('annkitkat',9566630,1);
+INSERT INTO `student` (`USERNAME`,`NUMBER`,`COURSE_ID`) VALUES ('janschön',4704786,1);
+INSERT INTO `student` (`USERNAME`,`NUMBER`,`COURSE_ID`) VALUES ('chrismed',2326630,1);
+INSERT INTO `student` (`USERNAME`,`NUMBER`,`COURSE_ID`) VALUES ('chriskoehl',4568230,1);
 
 INSERT INTO `lecture` (`ID`,`NAME`,`COURSE_ID`) VALUES (1,'Datenbanken',1);
 
