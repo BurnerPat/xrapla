@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -90,19 +91,21 @@ public class AppointmentProvider {
 			List<CourseGroup> groups = student.getGroups();
 			List<Appointment> apps = new ArrayList<Appointment>();
 			for (CourseGroup group : groups) {
-				for (Appointment a : (group.getAppointments())) {					
+				for (Appointment a : (group.getAppointments())) {	
+					if(a.getDateTime().compareTo(new Date()) >= 0)
 						apps.add(a);
 				}
 			}							
-			return sort(apps).subList(0, 2);
+			return apps.subList(0, apps.size() < 2 ? apps.size() : 2);
 		} else if (user instanceof Docent) {
 			Docent docent = (Docent) user;
 			List<Appointment> apps = new ArrayList<Appointment>();
 
 			for (Lecture lecture : docent.getLectures())
-				for (Appointment app : lecture.getAppointments())					
-					apps.add(app);
-			return sort(apps).subList(0, 2);
+				for (Appointment app : lecture.getAppointments())		
+					if(app.getDateTime().compareTo(new Date()) >= 0)
+						apps.add(app);
+			return apps.subList(0, apps.size() < 2 ? apps.size() : 2);
 		} else
 			return null;
 	}
@@ -146,21 +149,22 @@ public class AppointmentProvider {
 	    	List<CourseGroup> groups = student.getGroups();
 	    	List<Appointment> apps = new ArrayList<Appointment>();
 	    	for(CourseGroup group : groups){
-	    		for(Appointment a : (group.getAppointments())){
-	    			if(a.getCategory()=="exam")
+	    		for(Appointment a : group.getAppointments()){
+	    			if(a.getCategory()== Appointment.CATEGORY_EXAM && 
+	    					a.getDateTime().compareTo(new Date()) >= 0)
 	    				apps.add(a);
 	    		}
 	    	}
 	    	apps = sort(apps);
-	    	
-	    	return apps.subList(0, 2);	    		 
+	    		    	
+    		return apps.subList(0, apps.size() < 2 ? apps.size() : 2);	    	
 		}else
 			return null;
 		
 	}
 	
 	private List<Appointment> sort(List<Appointment> appointments) {
-		for (int i=1; i <= appointments.size(); i++) {
+		for (int i = 1; i < appointments.size(); i++) {
 			Appointment appoinment = appointments.get(i);
 			int j = i - 1;
 			while (j >= 0 && compare(appoinment, appointments.get(j)) < 0) {
