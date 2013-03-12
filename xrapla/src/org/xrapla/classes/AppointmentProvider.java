@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -39,9 +40,13 @@ public class AppointmentProvider {
 	    q.setParameter(2, sunday.getTime());
 	    q.setParameter(3, room);
 	    
-    	List<Appointment> appointments = q.getResultList();
-    	
-	    return appointments;
+	    
+	    try {
+	    	List<Appointment> appointments = q.getResultList();
+	    	return appointments;
+	    } catch(NoResultException ex) {
+	    	return null;
+	    }
 	}
 			
 	public List<Appointment> getAppointments(int weekOfYear, int year)
