@@ -2,10 +2,10 @@ package org.xrapla.beans;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,7 +26,7 @@ public class Course {
 	@OneToMany(mappedBy="course")
 	private List<CourseGroup> groups;
 	
-	@OneToMany(mappedBy="course")
+	@OneToMany(mappedBy="relatedCourse")
 	private List<Student> students;
 	
 	public Course(){
