@@ -17,7 +17,7 @@ public class Student extends User {
 	
 	@ManyToOne
 	@JoinColumn(name="COURSE_ID")
-	private Course course;
+	private Course relatedCourse;
 	
 	@ManyToMany
 	@JoinTable(name="STUDENT_GROUP",
@@ -37,12 +37,12 @@ public class Student extends User {
 		this.number = number;
 	}
 
-	public Course getCourse() {
-		return course;
+	public Course getRelatedCourse() {
+		return relatedCourse;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setRelatedCoursee(Course relatedCourse) {
+		this.relatedCourse = relatedCourse;
 	}
 
 	public List<CourseGroup> getGroups() {
