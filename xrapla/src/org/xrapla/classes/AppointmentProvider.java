@@ -150,7 +150,7 @@ public class AppointmentProvider {
 	    	List<Appointment> apps = new ArrayList<Appointment>();
 	    	for(CourseGroup group : groups){
 	    		for(Appointment a : group.getAppointments()){
-	    			if(a.getCategory()== Appointment.CATEGORY_EXAM && 
+	    			if(a.getCategory().equals(Appointment.CATEGORY_EXAM) && 
 	    					a.getDateTime().compareTo(new Date()) >= 0)
 	    				apps.add(a);
 	    		}
