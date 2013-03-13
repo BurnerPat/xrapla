@@ -76,11 +76,17 @@ public class AppointmentProvider {
 
 		q.setParameter(1, monday.getTime());
 		q.setParameter(2, sunday.getTime());
-
-		List<Appointment> appointments = q.getResultList();
-
-		em.close();
-
+		
+		List<Appointment> appointments = null;
+		try{
+			appointments = q.getResultList();
+		}
+		catch(NoResultException es){
+			appointments = null;
+		}
+		finally{
+			em.close();			
+		}
 		return appointments;
 	}
 
