@@ -94,8 +94,14 @@ public class RoomValidator {
 		TypedQuery<Room> qRoom = em.createQuery(
 	    		"SELECT r " +
 	    		"FROM Room r ", Room.class);
-	    		
-		List<Room> rooms = qRoom.getResultList();
+		
+		List<Room> rooms = null;
+		try{    		
+			rooms = qRoom.getResultList();
+		}
+		catch(NoResultException ex){
+			return null;
+		}
 		
 		for(int i = 0; i < rooms.size(); i++)
 		{
@@ -108,7 +114,7 @@ public class RoomValidator {
 			}			
 		}		
 		em.close();
-		return rooms;
+		return rooms.size() == 0 ? null : rooms;
 	}
 	
 	@SuppressWarnings("unused")
