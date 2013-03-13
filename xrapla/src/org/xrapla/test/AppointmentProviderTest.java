@@ -1,9 +1,11 @@
 package org.xrapla.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -28,8 +30,14 @@ public class AppointmentProviderTest {
 	    		"WHERE TYPE(a) = ?1", User.class);
 	    
 	    q.setParameter(1, Student.class);
-	    		
-	    List<User> users = q.getResultList();
+	    	
+	    List<User> users;
+	    try{
+	    	users = q.getResultList();
+	    }catch(NoResultException ex){
+	    	users = new ArrayList<User>();
+	    }
+	    
 	    Student user = null;
 	    for(User us : users){
 	    	if(us instanceof Student){
