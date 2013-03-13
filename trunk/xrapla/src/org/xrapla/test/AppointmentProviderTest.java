@@ -80,8 +80,8 @@ public class AppointmentProviderTest {
 		System.out.println();
 		
 		System.out.println("Nächste Klausuren: ");
-		if(appointmentsPerUser != null){
-			for(Appointment exam : appointmentsPerRoom)
+		if(exams != null){
+			for(Appointment exam : exams)
 				System.out.println(exam);
 		}
 	}
