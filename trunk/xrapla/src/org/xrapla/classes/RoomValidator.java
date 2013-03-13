@@ -1,86 +1,93 @@
 package org.xrapla.classes;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.Room;
 
-public class RoomValidator {
+public class RoomValidator {	
 	
-	EntityManager em; 
-	
-	public RoomValidator(EntityManager em){
-		this.em = em;
+	public RoomValidator(EntityManager em){		
 	}
 	
-	public boolean isAvailable(Room room, Date date, Date time){
-		/*EntityManagerFactory factory;		 
+	public boolean isAvailable(Room room, Date date, Date time, int duration){
+		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();*/
+	    EntityManager em = factory.createEntityManager();
 	    
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
 	    		"FROM Appointment a " +
 	    		"WHERE a.room = ?1 AND " +
 	    		"a.date = ?2 AND " +
-	    		"a.time = ?3", Appointment.class);
+	    		"((a.time < :startTime AND " +
+	    		"(a.time + a.duration) >= :startTime) OR" +
+	    		"(a.time >= :startTime AND " +
+	    		"a.time <= :endTime))", Appointment.class);
 	    
 	    q.setParameter(1, room);
 	    q.setParameter(2, date);
-	    q.setParameter(3, time);
+	    q.setParameter("startTime", time);
+	    
+	    Calendar cal = new GregorianCalendar();
+	    cal.setTime(time);
+	    cal.add(Calendar.MINUTE, duration);
+	    q.setParameter("endTime", cal.getTime());
 	    
 	    try {
-			Appointment appointment = q.getSingleResult();
-			return (appointment == null);
+			return q.getResultList().size() == 0;
 	    }
 	    catch (NoResultException ex) {
 	    	return true;
 	    }
+	    finally{
+	    	em.close();
+	    }
+	    	    
 	}
 	
-	public Room findNearestAvailableRoom(Room room, Date date, Date time){
-		List<Room> rooms = sortByProximity(getAvailableRooms(date, time), room);			
+	public Room findNearestAvailableRoom(Room room, Date date, Date time, int duration){
+		List<Room> rooms = sortByProximity(getAvailableRooms(date, time, duration), room);			
 		
 		if(rooms == null)
 			return null;
 		else
-			return rooms.get(0);
-				
-		/*for(Room freeRoom : rooms){
-			if(compare(freeRoom, room) <= 1 ||
-					(compare(freeRoom, room) >= - 1))
-				return freeRoom;
-		}			
-		
-		for(Room freeRoom : rooms){
-			if(compareWing(freeRoom, room) <= 1 ||
-					(compareWing(freeRoom, room) >= - 1))
-				return freeRoom;
-		}
-		
-		return null;*/
+			return rooms.get(0);				
 	}
 	
-	private List<Room> getAvailableRooms(Date date, Date time)
+	private List<Room> getAvailableRooms(Date date, Date time, int duration)
 	{
-		/*EntityManagerFactory factory;		 
+		EntityManagerFactory factory;		 
 	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();*/
+	    EntityManager em = factory.createEntityManager();
 	    
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
 	    		"FROM Appointment a " +
-	    		"WHERE a.date = ?2 AND " +
-	    		"a.time = ?3", Appointment.class);
+	    		"WHERE " +
+	    		"a.date = ?2 AND " +
+	    		"((a.time < :startTime AND " +
+	    		"(a.time + a.duration) >= :startTime) OR" +
+	    		"(a.time >= :startTime AND " +
+	    		"a.time <= :endTime))", Appointment.class);
 	    	    
 	    q.setParameter(2, date);
-	    q.setParameter(3, time);
+	    q.setParameter("startTime", time);
+	    
+	    Calendar cal = new GregorianCalendar();
+	    cal.setTime(time);
+	    cal.add(Calendar.MINUTE, duration);
+	    q.setParameter("endTime", cal.getTime());
 	    		
 		List<Appointment> appointments = q.getResultList();
 		
@@ -100,10 +107,11 @@ public class RoomValidator {
 				}
 			}			
 		}		
-						
+		em.close();
 		return rooms;
 	}
 	
+	@SuppressWarnings("unused")
 	private List<Room> sort(List<Room> rooms) {
 		for (int i=1; i <= rooms.size(); i++) {
 			Room room = rooms.get(i);
@@ -138,6 +146,7 @@ public class RoomValidator {
 		return room1.getWing() - room2.getWing();			
 	}
 	
+	@SuppressWarnings("unused")
 	private int compareLevel(Room room1, Room room2){
 		return ((int) room1.getNumber() / 100) - ((int) room2.getNumber() / 100);
 	}
