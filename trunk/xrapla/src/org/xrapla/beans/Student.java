@@ -2,17 +2,21 @@ package org.xrapla.beans;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("STUDENT")
+@Table(name="student")
 public class Student extends User {
 	
+	@Column(name="number")
 	private int number;
 	
 	@ManyToOne
@@ -24,6 +28,7 @@ public class Student extends User {
     	joinColumns={ @JoinColumn(name="STUDENT_ID", referencedColumnName="username")},
     	inverseJoinColumns={@JoinColumn(name="GROUP_ID", referencedColumnName="ID")})
 	private List<CourseGroup> groups;
+	
 	
 	public Student(){
 		

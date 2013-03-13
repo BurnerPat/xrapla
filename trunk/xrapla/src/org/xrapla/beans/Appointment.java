@@ -5,17 +5,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
 @IdClass(AppointmentId.class)
+@Table(name="appointment")
 public class Appointment {
 	
 	@Transient
@@ -38,7 +41,9 @@ public class Appointment {
 	/*@EmbeddedId
 	private AppointmentId id;*/
 	
-	private int duration;	
+	@Column(name="duration")
+	private int duration;
+	@Column(name="category")
 	private String category;
 	
 	@ManyToOne
