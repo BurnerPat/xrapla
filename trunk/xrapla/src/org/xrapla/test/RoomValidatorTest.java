@@ -38,15 +38,15 @@ public class RoomValidatorTest {
 		
 		AppointmentProvider appProv = new AppointmentProvider();
 		List<Appointment> appointments = appProv.getAppointments(1, 2013, user);
-		
-		System.out.println("Zu untersuchender Raum: " + appointments.get(0).getRoom());
-		System.out.println("===========================================\n");
-		
+	
 		RoomValidator roomV = new RoomValidator(em);
-		if(!roomV.isAvailable(appointments.get(0).getRoom(), appointments.get(0).getDate(), appointments.get(0).getTime())){
-			Room room = roomV.findNearestAvailableRoom(appointments.get(0).getRoom(), 
-					appointments.get(0).getDate(), 
-					appointments.get(0).getTime());
+								
+		if(!roomV.isAvailable(appointments.get(1).getRoom(), appointments.get(1).getDate(), appointments.get(1).getTime(), appointments.get(1).getDuration())){
+			Room room = roomV.findNearestAvailableRoom(appointments.get(1).getRoom(), 
+					appointments.get(1).getDate(), 
+					appointments.get(1).getTime(), appointments.get(1).getDuration());
+			System.out.println("Zu untersuchender Raum: " + appointments.get(1).getRoom() + " für " + appointments.get(1).getDateTime());
+			System.out.println("===========================================\n");	
 			System.out.println("Verfügbarer (nächster) Raum: " + room);
 		} else
 			System.out.println("Kein Raum verfügbar!");
