@@ -3,6 +3,7 @@ package org.xrapla.beans;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -51,21 +52,16 @@ public class Appointment {
 	public Appointment(){
 	}
 	
-	//@Transient
 	public Room getRoom() {
 		//return id.getRoom();
 		return room;
 	}
-	
-	//@Transient
-	public Date getDate() {
-		//return id.getDate();
+		
+	public Date getDate() {	
 		return date;
 	}
 	
-	//@Transient
-	public Date getTime() {
-		//return id.getTime();
+	public Date getTime() {	
 		return time;
 	}
 	
@@ -98,10 +94,16 @@ public class Appointment {
 	}	
 	
 	@Transient
-	public Date getDateTime(){
-		Date dateTime = date;
-		dateTime.setTime(time.getTime());
-		return dateTime;
+	public Date getDateTime(){		
+		Calendar dayCal = new GregorianCalendar();
+		dayCal.setTime(date);
+		
+		Calendar timeCal = new GregorianCalendar();
+		timeCal.setTime(time);
+		dayCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
+		dayCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+		dayCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
+		return dayCal.getTime();
 	}
 
 	public String toString(){
