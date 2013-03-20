@@ -7,12 +7,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.CourseGroup;
 import org.xrapla.beans.Docent;
@@ -22,6 +20,9 @@ import org.xrapla.beans.Student;
 import org.xrapla.beans.User;
 
 public class AppointmentProvider {
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	public List<Appointment> getAppointments(int weekOfYear, int year, Room room) {
 		Calendar monday = new GregorianCalendar();
@@ -31,9 +32,9 @@ public class AppointmentProvider {
 		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
 		sunday.add(Calendar.DATE, 7);
 
-		EntityManagerFactory factory;
-		factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
+//		EntityManagerFactory factory;
+//		factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+//		EntityManager em = factory.createEntityManager();
 
 		// Build and execute SQL-Statement
 		TypedQuery<Appointment> q = em.createQuery("SELECT a "
@@ -62,10 +63,10 @@ public class AppointmentProvider {
 		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
 		sunday.add(Calendar.DATE, 7);
 
-		EntityManagerFactory factory;
-		factory = Persistence
-				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
+//		EntityManagerFactory factory;
+//		factory = Persistence
+//				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+//		EntityManager em = factory.createEntityManager();
 
 		// Build and execute SQL-Statement
 		TypedQuery<Appointment> q = em.createQuery(
@@ -117,9 +118,9 @@ public class AppointmentProvider {
 	}
 
 	public void insert(Appointment appointment) {
-		EntityManagerFactory factory = Persistence
-				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
+//		EntityManagerFactory factory = Persistence
+//				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+//		EntityManager em = factory.createEntityManager();
 
 		em.getTransaction().begin();
 		em.persist(appointment);
@@ -129,9 +130,9 @@ public class AppointmentProvider {
 	}
 
 	public void remove(Appointment appointment) {
-		EntityManagerFactory factory = Persistence
-				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
+//		EntityManagerFactory factory = Persistence
+//				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+//		EntityManager em = factory.createEntityManager();
 
 		em.getTransaction().begin();
 		em.remove(appointment);

@@ -6,24 +6,22 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.Room;
 
 public class RoomValidator {	
 	
-	public RoomValidator(EntityManager em){		
-	}
+	@PersistenceContext
+	private EntityManager em;
 	
 	public boolean isAvailable(Room room, Date date, Date time, int duration){
-		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();
+//		EntityManagerFactory factory;		 
+//	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+//	    EntityManager em = factory.createEntityManager();
 	    
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
@@ -67,9 +65,9 @@ public class RoomValidator {
 	
 	private List<Room> getAvailableRooms(Date date, Date time, int duration)
 	{
-		EntityManagerFactory factory;		 
-	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-	    EntityManager em = factory.createEntityManager();
+//		EntityManagerFactory factory;		 
+//	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
+//	    EntityManager em = factory.createEntityManager();
 	    
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
