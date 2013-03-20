@@ -15,6 +15,7 @@ import org.xrapla.classes.AppointmentProvider;
 import org.xrapla.classes.RoomValidator;
 
 public class RoomValidatorTest {
+		
 	public static void main(String[] args) {
 		
 		EntityManagerFactory factory;		 
@@ -39,7 +40,7 @@ public class RoomValidatorTest {
 		AppointmentProvider appProv = new AppointmentProvider();
 		List<Appointment> appointments = appProv.getAppointments(1, 2013, user);
 	
-		RoomValidator roomV = new RoomValidator(em);
+		RoomValidator roomV = new RoomValidator();
 								
 		if(!roomV.isAvailable(appointments.get(1).getRoom(), appointments.get(1).getDate(), appointments.get(1).getTime(), appointments.get(1).getDuration())){
 			Room room = roomV.findNearestAvailableRoom(appointments.get(1).getRoom(), 
