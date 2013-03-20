@@ -10,7 +10,7 @@ import org.xrapla.Constants;
 import org.xrapla.beans.User;
 
 @Stateless(name = "UserProvider")
-public class UserProvider {
+public class UserProvider implements UserProviderInterface{
 	@PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
 	private EntityManager em;
 	

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.xrapla.classes.BeanFactory;
+import org.xrapla.classes.UserProviderInterface;
 import org.xrapla.handlers.UserHandler;
 
 @WebServlet("/ajaxLogin")
@@ -34,7 +36,8 @@ public class AjaxLoginServlet extends HttpServlet {
 		String username = request.getParameter(USERNAME);
 		String password = request.getParameter(PASSWORD);
 		
-		UserHandler handler = new UserHandler(request.getSession(true));
+		UserProviderInterface userProvider = BeanFactory.getUserProvider();
+		UserHandler handler = new UserHandler(request.getSession(true), userProvider);
 		
 		if (username != null && password != null && handler.login(username, password)) {
 			out.print("success");
