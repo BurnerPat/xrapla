@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -19,7 +20,8 @@ import org.xrapla.beans.Room;
 import org.xrapla.beans.Student;
 import org.xrapla.beans.User;
 
-public class AppointmentProvider {
+@Stateless(name="AppointmentProvider")
+public class AppointmentProvider implements AppointmentProviderInterface{
 	
 	@PersistenceContext
 	private EntityManager em;
