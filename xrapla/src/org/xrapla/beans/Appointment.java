@@ -27,15 +27,17 @@ public class Appointment {
 	
 	@Id	
 	@ManyToOne
-	@JoinColumn(name="ROOM_ID")	
+	@JoinColumn(name="ROOM_ID")		
 	private Room room;
 	
 	@Id
 	@Temporal(TemporalType.DATE)
+	@Column(name="date")
 	private Date date;
 	
 	@Id
 	@Temporal(TemporalType.TIME)
+	@Column(name="time")
 	private Date time;
 	
 	/*@EmbeddedId

@@ -4,9 +4,9 @@
   version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
   <persistence-unit name="xrapla" transaction-type="RESOURCE_LOCAL">
   	<provider>org.hibernate.ejb.HibernatePersistence</provider>        
-       
-    <class>org.xrapla.beans.Room</class>
-    <class>org.xrapla.beans.Appointment</class>    
+           
+    <class>org.xrapla.beans.Appointment</class>
+    <class>org.xrapla.beans.Room</class>    
     <class>org.xrapla.beans.Course</class>
     <class>org.xrapla.beans.Docent</class>
     <class>org.xrapla.beans.CourseGroup</class>

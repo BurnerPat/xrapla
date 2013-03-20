@@ -1,14 +1,17 @@
 package org.xrapla.classes;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.xrapla.Constants;
 import org.xrapla.beans.User;
 
+@Stateless(name = "UserProvider")
 public class UserProvider {
-	@PersistenceContext
+	@PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
 	private EntityManager em;
 	
 	public User getUser(String username, String password) {

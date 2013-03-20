@@ -10,12 +10,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.Room;
 
 public class RoomValidator {	
 	
-	@PersistenceContext
+	@PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
 	private EntityManager em;
 	
 	public boolean isAvailable(Room room, Date date, Date time, int duration){

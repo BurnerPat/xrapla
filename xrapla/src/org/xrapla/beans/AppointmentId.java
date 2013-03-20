@@ -3,7 +3,6 @@ package org.xrapla.beans;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Table;
 
 //@Embeddable
@@ -14,14 +13,15 @@ public class AppointmentId implements Serializable {
 	
 	/*@ManyToOne
 	@JoinColumn(name="ROOM_ID")	*/
-	@Column(name="room")
+//	@Column(name="room")
 	private Room room;
 	
 	//@Temporal(TemporalType.DATE)
-	@Column(name="date")
+//	@Column(name="date")
 	private Date date;
+	
 	//@Temporal(TemporalType.TIME)
-	@Column(name="time")
+//	@Column(name="time")
 	private Date time;
 	
 	public AppointmentId() {
