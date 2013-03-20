@@ -3,15 +3,17 @@ package org.xrapla.handlers;
 import javax.servlet.http.HttpSession;
 
 import org.xrapla.beans.User;
-import org.xrapla.classes.UserProvider;
+import org.xrapla.classes.UserProviderInterface;
 
 public class UserHandler {
 	private static final String USER = "USER";
 	
 	private final HttpSession session;
+	private final UserProviderInterface provider; 
 	
-	public UserHandler(HttpSession session) {
+	public UserHandler(HttpSession session, UserProviderInterface provider) {
 		this.session = session;
+		this.provider = provider;
 	}
 	
 	public boolean isLoggedIn() {
@@ -19,7 +21,7 @@ public class UserHandler {
 	}
 	
 	public boolean login(String username, String password) {
-		UserProvider provider = new UserProvider();		
+		//UserProvider provider = new UserProvider();		
 		User user = provider.getUser(username, password);
 		
 		if (user != null) {
