@@ -6,12 +6,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.xrapla.Constants;
 import org.xrapla.beans.Appointment;
 import org.xrapla.beans.CourseGroup;
 import org.xrapla.beans.Docent;
@@ -20,10 +20,10 @@ import org.xrapla.beans.Room;
 import org.xrapla.beans.Student;
 import org.xrapla.beans.User;
 
-@Stateless(name="AppointmentProvider")
+
 public class AppointmentProvider implements AppointmentProviderInterface{
 	
-	@PersistenceContext
+	@PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
 	private EntityManager em;
 
 	public List<Appointment> getAppointments(int weekOfYear, int year, Room room) {

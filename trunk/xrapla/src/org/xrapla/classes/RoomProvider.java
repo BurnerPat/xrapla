@@ -7,10 +7,11 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.xrapla.Constants;
 import org.xrapla.beans.Room;
 
 public class RoomProvider {
-	@PersistenceContext
+	@PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
 	private EntityManager em;
 	
 	public List<Room> getRooms() {
