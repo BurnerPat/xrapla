@@ -18,12 +18,16 @@ public abstract class User {
 	@Id
 	@Column(name="username")
 	private String username;
+	
 	@Column(name="password")
 	private String password;
+	
 	@Column(name="lastname")
 	private String lastname;
+	
 	@Column(name="firstname")
 	private String firstname;
+	
 	@Column(name="email")
 	private String email;	
 		

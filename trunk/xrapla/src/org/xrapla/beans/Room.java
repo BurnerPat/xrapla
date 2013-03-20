@@ -21,6 +21,10 @@ public class Room {
 	
 	@OneToMany(mappedBy="room")
 	List<Appointment> appointments;
+	
+	public Room() {
+		
+	}
 
 	public int getNumber() {
 		return number;
