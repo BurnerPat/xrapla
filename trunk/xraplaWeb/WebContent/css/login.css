@@ -1,0 +1,33 @@
+#login_container {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 25%;
+	text-align: center;
+}
+
+#login_container .widget {
+	margin: 0 0 0 -16px;
+	display: inline-block;
+}
+
+div.row {
+	width: 100%;
+	display: block;
+	margin-bottom: 8px;
+	text-align: right;
+}
+
+#login_container .button {
+	margin-top: 8px;
+	width: 100%;
+}
+
+#error {
+	display: none;
+	width: 100%;
+	margin: 16px 0 8px 0;
+	text-align: center;
+	color: #ff4444;
+	font-weight: bold;
+}

@@ -1,0 +1,8 @@
+#calendar {
+	position: absolute;
+	top: 105px;
+	left: 24px;
+	right: 24px;
+	bottom: 32px;
+	margin: 0;
+}
