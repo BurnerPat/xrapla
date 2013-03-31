@@ -21,7 +21,6 @@ public class UserHandler {
 	}
 	
 	public boolean login(String username, String password) {
-		//UserProvider provider = new UserProvider();		
 		User user = provider.getUser(username, password);
 		
 		if (user != null) {

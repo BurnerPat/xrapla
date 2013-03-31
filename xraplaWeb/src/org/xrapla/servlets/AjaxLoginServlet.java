@@ -36,7 +36,7 @@ public class AjaxLoginServlet extends HttpServlet {
 		String username = request.getParameter(USERNAME);
 		String password = request.getParameter(PASSWORD);
 		
-		UserProviderLocal userProvider = new BeanFactory().getUserProvider();
+		UserProviderLocal userProvider = BeanFactory.getUserProvider();
 		UserHandler handler = new UserHandler(request.getSession(true), userProvider);
 		
 		if (username != null && password != null && handler.login(username, password)) {
