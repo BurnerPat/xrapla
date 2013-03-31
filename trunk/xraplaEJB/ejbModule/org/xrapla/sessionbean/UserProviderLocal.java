@@ -1,7 +1,6 @@
 package org.xrapla.sessionbean;
 
 import javax.ejb.Local;
-
 import org.xrapla.entities.User;
 
 @Local

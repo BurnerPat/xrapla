@@ -24,7 +24,7 @@ public class PageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
-		UserHandler handler = new UserHandler(request.getSession(true), new BeanFactory().getUserProvider());
+		UserHandler handler = new UserHandler(request.getSession(true), BeanFactory.getUserProvider());
 		
 		if (handler.isLoggedIn()) {
 			String page = request.getParameter(PAGE);
