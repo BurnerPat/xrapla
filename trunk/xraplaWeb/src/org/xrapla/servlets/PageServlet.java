@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.openejb.server.httpd.HttpResponse;
 import org.xrapla.factory.BeanFactory;
 import org.xrapla.handlers.UserHandler;
 
@@ -35,7 +34,7 @@ public class PageServlet extends HttpServlet {
 				request.getRequestDispatcher(page).forward(request, response);
 			}
 			else {
-				response.sendError(HttpResponse.SC_NOT_FOUND);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		}
 		else {
