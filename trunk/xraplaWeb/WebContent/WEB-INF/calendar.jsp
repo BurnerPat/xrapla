@@ -18,7 +18,7 @@
 		<h1>Vorlesungsplan</h1>
 		<div class="widget" id="calendar">
 			<%	Calendar calendar = Calendar.getInstance(); 
-				UserHandler userHandler = new UserHandler(request.getSession(true), new BeanFactory().getUserProvider());
+				UserHandler userHandler = new UserHandler(request.getSession(true), BeanFactory.getUserProvider());
 				UserCalendarHandler handler = new UserCalendarHandler(userHandler.getUser(), calendar); %>
 			<table>
 				<thead>
