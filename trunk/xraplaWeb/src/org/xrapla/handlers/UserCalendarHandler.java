@@ -7,7 +7,8 @@ import java.util.List;
 
 import org.xrapla.entities.Appointment;
 import org.xrapla.entities.User;
-import org.xrapla.sessionbean.AppointmentProvider;
+import org.xrapla.factory.BeanFactory;
+import org.xrapla.sessionbean.AppointmentProviderLocal;
 
 public class UserCalendarHandler {
 	private List<Appointment> appointments;
@@ -16,7 +17,7 @@ public class UserCalendarHandler {
 	private int maxHour;
 	
 	public UserCalendarHandler(User user, Calendar calendar) {
-		AppointmentProvider provider = new AppointmentProvider();
+		AppointmentProviderLocal provider = BeanFactory.getAppointmentProvider();
 		appointments = provider.getAppointments(calendar.get(Calendar.WEEK_OF_YEAR), calendar.get(Calendar.YEAR), user);
 		
 		if (appointments != null) {
