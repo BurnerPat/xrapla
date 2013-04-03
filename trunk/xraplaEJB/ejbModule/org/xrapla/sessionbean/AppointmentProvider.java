@@ -50,8 +50,9 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		q.setParameter(3, room);		
 		
 		try {
-			List<Appointment> appointments = q.getResultList();	    	
-	    	return appointments;
+			List<Appointment> appointments = q.getResultList();
+			return null;
+	    	//return appointments;
 	    } catch(NoResultException ex) {
 	    	return null;
 	    }
