@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="xraplaWeb">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse"/>
+    <property name="xraplaEJB.location" value="../xraplaEJB"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+	<!-- --> 
+	<property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+	<property name="main-class"  value="xraplaWeb"/>
+	<!-- -->
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath">
+        <pathelement location="../../../../xrapla/EarContent/lib/antlr-2.7.7.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/dom4j-1.6.1.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/hibernate-commons-annotations-4.0.1.Final.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/hibernate-core-4.1.10.Final.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/hibernate-entitymanager-4.1.10.Final.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/javassist-3.15.0-GA.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/jboss-logging-3.1.0.GA.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+        <pathelement location="../../../../xrapla/EarContent/lib/mysql-connector-java-5.1.23-bin.jar"/>
+    </path>
+    <path id="GlassFish 3.1.2 [GlassFish 3.1.2].libraryclasspath">
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/glassfish-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/bean-validator.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/endorsed/javax.annotation.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/endorsed/jaxb-api-osgi.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/endorsed/webservices-api-osgi.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/glassfish-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/grizzly-comet.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/grizzly-websockets.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/ha-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.ejb.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.el-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.el.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.enterprise.deploy.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.faces.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.jms.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.mail.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.management.j2ee.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.persistence.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.resource.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.security.auth.message.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.security.jacc.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.servlet-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.servlet.jsp-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.servlet.jsp.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.servlet.jsp.jstl-api.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.servlet.jsp.jstl.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/javax.transaction.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-client.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-core.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-gf-server.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-gf-servlet.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-gf-statsproviders.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-grizzly.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-json.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-moxy.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jersey-multipart.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/weld-osgi-bundle.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.antlr.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.asm.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.core.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.jpa.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.jpa.modelgen.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.moxy.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/org.eclipse.persistence.oracle.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/jaxb-osgi.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/webservices-connector.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/webservices-extra-jdk-packages.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/webservices-osgi.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/glassfish/modules/webservices.security.jar"/>
+        <pathelement location="../../../../Glassfish/glassfish3/mq/lib/jaxm-api.jar"/>
+    </path>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
+    <path id="xraplaEJB.classpath">
+        <pathelement location="${xraplaEJB.location}/build/classes"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <path refid="GlassFish 3.1.2 [GlassFish 3.1.2].libraryclasspath"/>
+    </path>
+    <path id="xraplaWeb.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="GlassFish 3.1.2 [GlassFish 3.1.2].libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <path refid="xraplaEJB.classpath"/>
+    </path>
+	<!-- -->
+		<target name="compile">
+		        <mkdir dir="${classes.dir}"/>
+		        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+		    </target>
+
+		    <target name="jar" depends="compile">
+		        <mkdir dir="${jar.dir}"/>
+		        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+		            <manifest>
+		                <attribute name="Main-Class" value="${main-class}"/>
+		            </manifest>
+		        </jar>
+		    </target>
+		<path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
+		<target name="run" depends="jar">
+	        <java fork="true" classname="${main-class}">
+	            <classpath>
+	                <path refid="classpath"/>
+	                <path refid="application"/>
+	            </classpath>
+	        </java>
+	    </target>
+		<target name="junit" depends="jar">
+		        <junit printsummary="yes">
+		            <classpath>
+		                <path refid="classpath"/>
+		                <path refid="application"/>
+		            </classpath>
+		            
+		            <batchtest fork="yes">
+		                <fileset dir="${src.dir}" includes="*Test.java"/>
+		            </batchtest>
+		        </junit>
+		    </target>
+		<!-- -->
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall">
+        <ant antfile="Annikabuild.xml" dir="${xraplaEJB.location}" inheritAll="false" target="clean"/>
+    </target>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects">
+        <ant antfile="Annikabuild.xml" dir="${xraplaEJB.location}" inheritAll="false" target="build-project">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="xraplaWeb.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+</project>
