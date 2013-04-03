@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
 
 import org.junit.Test;
 import org.xrapla.entities.*;
+import org.xrapla.factory.BeanFactory;
 import org.xrapla.sessionbean.*;
 
 public class AppointmentProviderTest {
@@ -75,7 +76,7 @@ public class AppointmentProviderTest {
 
 	@Test
 	public void testAppointmentForWeek() {
-		AppointmentProvider prov = new AppointmentProvider();
+		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		Calendar cal = new GregorianCalendar();
 
 		User user = getTestUser();
@@ -93,7 +94,7 @@ public class AppointmentProviderTest {
 
 	@Test
 	public void testAppointmentForWeekAndRoom() {
-		AppointmentProvider prov = new AppointmentProvider();
+		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		Calendar cal = new GregorianCalendar();
 
 		Room room = getRoom();
@@ -113,7 +114,7 @@ public class AppointmentProviderTest {
 
 	@Test
 	public void testNextTwoAppointments() {
-		AppointmentProvider prov = new AppointmentProvider();
+		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		User user = getTestUser();
 
 		List<Appointment> nextEvents = prov.getNextTwoAppointments(user);
@@ -130,7 +131,7 @@ public class AppointmentProviderTest {
 
 	@Test
 	public void testNextExams() {
-		AppointmentProvider prov = new AppointmentProvider();
+		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		User user = getTestUser();
 
 		List<Appointment> exams = prov.getExams(user);

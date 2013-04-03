@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import org.xrapla.entities.*;
+import org.xrapla.factory.BeanFactory;
 import org.xrapla.sessionbean.*;
 
 public class RoomValidatorTest {
@@ -33,7 +34,7 @@ public class RoomValidatorTest {
 	    	}
 	    }
 		
-		AppointmentProvider appProv = new AppointmentProvider();
+	    AppointmentProviderLocal appProv = BeanFactory.getAppointmentProvider();
 		List<Appointment> appointments = appProv.getAppointments(1, 2013, user);
 	
 		RoomValidator roomV = new RoomValidator();

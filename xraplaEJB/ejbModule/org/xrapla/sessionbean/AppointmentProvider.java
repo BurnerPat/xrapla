@@ -30,7 +30,7 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 	private EntityManager em;
     
     public AppointmentProvider() {
-        // TODO Auto-generated constructor stub
+
     }
 
 	public List<Appointment> getAppointments(int weekOfYear, int year, Room room) {
@@ -50,8 +50,8 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		q.setParameter(3, room);		
 		
 		try {
-			List<Appointment> appointments = q.getResultList();
-			return appointments;
+			List<Appointment> appointments = q.getResultList();	    	
+	    	return appointments;
 	    } catch(NoResultException ex) {
 	    	return null;
 	    }
