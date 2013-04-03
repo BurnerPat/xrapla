@@ -42,8 +42,8 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		sunday.add(Calendar.DATE, 7);
 
 		TypedQuery<Appointment> q = em.createQuery("SELECT a "
-				+ "FROM Appointment a " + "WHERE a.date >= ?1 "
-				+ "AND a.date <= ?2 " + "AND a.room = ?3", Appointment.class);
+				+ "FROM Appointment a " + "WHERE a.id.date >= ?1 "
+				+ "AND a.id.date <= ?2 " + "AND a.id.room = ?3", Appointment.class);
 
 		q.setParameter(1, monday.getTime());
 		q.setParameter(2, sunday.getTime());
@@ -68,7 +68,7 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		TypedQuery<Appointment> q = em.createQuery(
 				"SELECT a " + 
 				"FROM Appointment a " + 
-				"WHERE a.date>=?1 AND a.date<=?2",
+				"WHERE a.id.date>=?1 AND a.id.date<=?2",
 				Appointment.class);
 
 		q.setParameter(1, monday.getTime());

@@ -21,9 +21,9 @@ public class UserCalendarHandler {
 		appointments = provider.getAppointments(calendar.get(Calendar.WEEK_OF_YEAR), calendar.get(Calendar.YEAR), user);
 		
 		if (appointments != null) {
-			day = new ArrayList<ArrayList<Appointment>>(7);
+			day = new ArrayList<ArrayList<Appointment>>();
 			for (int i = 0; i < 7; i++) {
-				day.set(i, new ArrayList<Appointment>());
+				day.add(new ArrayList<Appointment>());
 			}
 			
 			categorizeDays();
