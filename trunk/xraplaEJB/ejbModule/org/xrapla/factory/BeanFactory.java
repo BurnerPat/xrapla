@@ -2,6 +2,7 @@ package org.xrapla.factory;
 
 import javax.naming.InitialContext;
 
+import org.xrapla.sessionbean.AppointmentProviderLocal;
 import org.xrapla.sessionbean.UserProvider;
 import org.xrapla.sessionbean.UserProviderLocal;
 
@@ -15,22 +16,34 @@ public class BeanFactory {
      * Default constructor. 
      */
     private BeanFactory() {
-        // TODO Auto-generated constructor stub
+
     }
 
-    public static UserProviderLocal getUserProvider()
-    {
+    public static UserProviderLocal getUserProvider() {
     	UserProviderLocal bean = null;
-        try
-        {
+    	
+        try {
             InitialContext ctx = new InitialContext();
-            System.out.println("-------------->>>>> Name: " + UserProvider.class.getName());
             bean = (UserProviderLocal) ctx.lookup("java:global/xrapla/xraplaEJB/UserProvider!org.xrapla.sessionbean.UserProviderLocal");
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             ex.printStackTrace();
         }
+        
         return bean;
+    }
+    
+    public static AppointmentProviderLocal getAppointmentProvider() {
+    	AppointmentProviderLocal bean = null;
+    	
+    	try {
+    		InitialContext ctx = new InitialContext();
+    		bean = (AppointmentProviderLocal) ctx.lookup("java:global/xrapla/xraplaEJB/AppointmentProvider!org.xrapla.sessionbean.AppointmentProviderLocal");
+    	}
+    	catch (Exception ex) {
+    		ex.printStackTrace();
+    	}
+    	
+    	return bean;
     }
 }
