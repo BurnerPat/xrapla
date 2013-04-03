@@ -28,16 +28,11 @@ import org.xrapla.entities.User;
  * Session Bean implementation class AppointmentProvider
  */
 @Stateless
-@TransactionManagement(TransactionManagementType.BEAN)
-@LocalBean
 public class AppointmentProvider implements AppointmentProviderLocal {
 
-    @PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
+    @PersistenceContext
 	private EntityManager em;
     
-    /**
-     * Default constructor. 
-     */
     public AppointmentProvider() {
         // TODO Auto-generated constructor stub
     }
@@ -50,11 +45,6 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
 		sunday.add(Calendar.DATE, 7);
 
-//		EntityManagerFactory factory;
-//		factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-//		EntityManager em = factory.createEntityManager();
-
-		// Build and execute SQL-Statement
 		TypedQuery<Appointment> q = em.createQuery("SELECT a "
 				+ "FROM Appointment a " + "WHERE a.date >= ?1 "
 				+ "AND a.date <= ?2 " + "AND a.room = ?3", Appointment.class);
@@ -64,11 +54,9 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		q.setParameter(3, room);		
 		
 		try {
-			List<Appointment> appointments = q.getResultList();
-	    	em.close();
+			List<Appointment> appointments = q.getResultList();	    	
 	    	return appointments;
 	    } catch(NoResultException ex) {
-	    	em.close();
 	    	return null;
 	    }
 	}
@@ -81,12 +69,6 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
 		sunday.add(Calendar.DATE, 7);
 
-//		EntityManagerFactory factory;
-//		factory = Persistence
-//				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-//		EntityManager em = factory.createEntityManager();
-
-		// Build and execute SQL-Statement
 		TypedQuery<Appointment> q = em.createQuery(
 				"SELECT a " + 
 				"FROM Appointment a " + 
@@ -136,27 +118,15 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 	}
 
 	public void insert(Appointment appointment) {
-//		EntityManagerFactory factory = Persistence
-//				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-//		EntityManager em = factory.createEntityManager();
-
 		em.getTransaction().begin();
 		em.persist(appointment);
 		em.getTransaction().commit();
-
-		em.close();
 	}
 
 	public void remove(Appointment appointment) {
-//		EntityManagerFactory factory = Persistence
-//				.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-//		EntityManager em = factory.createEntityManager();
-
 		em.getTransaction().begin();
 		em.remove(appointment);
 		em.getTransaction().commit();
-
-		em.close();
 	}
 
 	public Appointment update(Appointment appointment) {
