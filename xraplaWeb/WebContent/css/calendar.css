@@ -6,3 +6,47 @@
 	bottom: 32px;
 	margin: 0;
 }
+
+#calendar #wrapper {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+#calendar table {
+	width: 100%;
+	border: 1px solid #666666;
+	border-collapse: collapse;	
+}
+
+#calendar th {
+	background-color: #D6D6D6;
+	font-weight: bold;
+	border-left: 1px solid #666666;
+	border-right: 1px solid #666666;
+}
+
+#calendar tr {
+	border-bottom: 1px solid #666666;
+	height: 32px;
+}
+
+#calendar td {
+	border-left: 1px solid #666666;
+	border-right: 1px solid #666666;
+}
+
+#calendar thead th,
+#calendar td {
+	width: 15%;
+}
+
+#calendar thead th:first-child,
+#calendar tbody th {
+	width: 10%;
+}
+
+#calendar tbody tr:nth-child(odd) {
+	border-bottom: 1px solid #D6D6D6;
+}
