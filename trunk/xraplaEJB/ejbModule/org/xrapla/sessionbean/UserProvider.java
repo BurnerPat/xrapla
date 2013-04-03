@@ -22,19 +22,19 @@ public class UserProvider implements UserProviderLocal {
 
     @Override
     public User getUser(String username, String password) {
-            Query q = em.createQuery("SELECT u FROM User u WHERE u.username=?1 AND u.password=?2");
+        Query q = em.createQuery("SELECT u FROM User u WHERE u.username=?1 AND u.password=?2");
 
-            q.setParameter(1, username);
-            q.setParameter(2, password);
+        q.setParameter(1, username);
+        q.setParameter(2, password);
 
-            User user;
-            try {
-                    user = (User)q.getSingleResult();
-            }
-            catch (NoResultException ex) {
-                    user = null;
-            }
-            
-            return (user);
+        User user;
+        try {
+                user = (User)q.getSingleResult();
+        }
+        catch (NoResultException ex) {
+                user = null;
+        }
+        
+        return (user);
     }
 }
