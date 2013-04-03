@@ -40,10 +40,10 @@
 		   
 		   Throwable ex = exception;
 		   do {
-			   for (StackTraceElement e : exception.getStackTrace()) { 
+			   for (StackTraceElement e : ex.getStackTrace()) { 
 			   		if (e.getClassName().startsWith("org.xrapla")) {
-			   			cause = ex;
 			   			element = e;
+			   			cause = ex;
 			   			break;
 			   		}
 			   } 
