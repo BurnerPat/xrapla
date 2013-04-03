@@ -81,9 +81,6 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		catch(NoResultException es){
 			appointments = null;
 		}
-		finally{
-			em.close();			
-		}
 		return appointments;
 	}
 
