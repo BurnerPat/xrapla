@@ -22,11 +22,9 @@ import org.xrapla.entities.Room;
  * Session Bean implementation class RoomValidator
  */
 @Stateless
-@TransactionManagement(TransactionManagementType.BEAN)
-@LocalBean
 public class RoomValidator implements RoomValidatorLocal {
 
-	@PersistenceContext(unitName=Constants.PERSISTANCE_UNIT_NAME)
+	@PersistenceContext
 	private EntityManager em;
 	
     /**
@@ -37,10 +35,6 @@ public class RoomValidator implements RoomValidatorLocal {
     }
     
     public boolean isAvailable(Room room, Date date, Date time, int duration){
-//		EntityManagerFactory factory;		 
-//	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-//	    EntityManager em = factory.createEntityManager();
-	    
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
 	    		"FROM Appointment a " +
@@ -65,11 +59,7 @@ public class RoomValidator implements RoomValidatorLocal {
 	    }
 	    catch (NoResultException ex) {
 	    	return true;
-	    }
-	    finally{
-	    	em.close();
-	    }
-	    	    
+	    }    
 	}
 	
 	public Room findNearestAvailableRoom(Room room, Date date, Date time, int duration){
@@ -83,10 +73,6 @@ public class RoomValidator implements RoomValidatorLocal {
 	
 	private List<Room> getAvailableRooms(Date date, Date time, int duration)
 	{
-//		EntityManagerFactory factory;		 
-//	    factory = Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
-//	    EntityManager em = factory.createEntityManager();
-	    
 	    TypedQuery<Appointment> q = em.createQuery(
 	    		"SELECT a " +
 	    		"FROM Appointment a " +
@@ -129,7 +115,6 @@ public class RoomValidator implements RoomValidatorLocal {
 				}
 			}			
 		}		
-		em.close();
 		return rooms.size() == 0 ? null : rooms;
 	}
 	
