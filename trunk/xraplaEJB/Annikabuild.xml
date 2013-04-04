@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
+<?eclipse.ant.import?>
 <project basedir="." default="build" name="xraplaEJB">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../eclipse"/>
@@ -107,14 +103,14 @@
 	        </jar>
 	    </target>
 	<path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
-	<target name="run" depends="jar">
+	<!--target name="run" depends="jar">
         <java fork="true" classname="${main-class}">
             <classpath>
                 <path refid="classpath"/>
                 <path refid="application"/>
             </classpath>
         </java>
-    </target>
+    </target-->
 	<target name="junit" depends="jar">
 	        <junit printsummary="yes">
 	            <classpath>
@@ -123,7 +119,7 @@
 	            </classpath>
 	            
 	            <batchtest fork="yes">
-	                <fileset dir="${src.dir}" includes="*Test.java"/>
+	                <fileset dir="build/classes/org/xrapla/test" includes="*Test.java"/>
 	            </batchtest>
 	        </junit>
 	    </target>
