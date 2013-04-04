@@ -8,7 +8,11 @@ public class JenkinsTest {
 
 	@Test
 	public void test() {
-		assertTrue("Successful test",true);
+		try{		
+			assertTrue("Successful test",true);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		//fail("Not yet implemented");
 	}
 
