@@ -7,14 +7,9 @@ import org.junit.Test;
 public class JenkinsTest {
 
 	@Test
-	public void test() {
-		System.out.println("Test reached");
-		try{		
-			assertTrue("Successful test",true);
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		//fail("Not yet implemented");
+	public void testHelloWorld() {
+		String s = "HelloWorld";
+		assertEquals("Just a test to see if everything works ...", "HelloWorld", s);
 	}
 
 }
