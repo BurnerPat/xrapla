@@ -170,7 +170,7 @@
 	<junit printsummary="on" showoutput="on" filtertrace="off"> 
 		<!--test name="org.xrapla.JenkinsTest" outfile="report"/-->
 		<batchtest>
-            <fileset dir="build/classes/org/xrapla/test" includes="*Test.java" />			
+            <fileset dir="build/classes/org/xrapla/test" includes="JenkinsTest.java" />			
         </batchtest>
 	</junit>
 </project>
