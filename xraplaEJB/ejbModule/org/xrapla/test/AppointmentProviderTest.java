@@ -76,6 +76,7 @@ public class AppointmentProviderTest {
 
 	@Test
 	public void testAppointmentForWeek() {
+		System.out.println("start AppointmentForWeekTest");
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		Calendar cal = new GregorianCalendar();
 
@@ -90,10 +91,12 @@ public class AppointmentProviderTest {
 			assertThat(calApp.get(Calendar.WEEK_OF_YEAR),
 					is(cal.get(Calendar.WEEK_OF_YEAR)));
 		}
+		System.out.println("stop AppointmentForWeekTest");
 	}
 
 	@Test
 	public void testAppointmentForWeekAndRoom() {
+		System.out.println("start AppointmentForWeekAndRoom");
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		Calendar cal = new GregorianCalendar();
 
@@ -109,7 +112,7 @@ public class AppointmentProviderTest {
 					is(cal.get(Calendar.WEEK_OF_YEAR)));
 			assertTrue("Room:", appointment.getRoom().getNumber() == room.getNumber());
 		}
-
+		System.out.println("stop AppointmentForWeekAndRoom");
 	}
 
 	@Test
