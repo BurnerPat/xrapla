@@ -168,6 +168,6 @@
         <antcall target="build"/>
     </target>
 	<junit printsummary="on"> 
-		<test name="org.xrapla.*Test"/>
+		<test name="org.xrapla.JenkinsTest"/>
 	</junit>
 </project>
