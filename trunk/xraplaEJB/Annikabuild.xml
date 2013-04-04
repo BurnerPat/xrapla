@@ -168,9 +168,9 @@
         <antcall target="build"/>
     </target>
 	<junit printsummary="on" showoutput="on" filtertrace="off"> 
-		<test name="org.xrapla.JenkinsTest" outfile="report"/>
+		<!--test name="org.xrapla.JenkinsTest" outfile="report"/-->
 		<batchtest fork="yes">
-            <fileset dir="build/classes/org/xrapla/test" includes="*Test.java"/>
+            <fileset dir="build/classes/org/xrapla/test" includes="*Test.java" />			
         </batchtest>
 	</junit>
 </project>
