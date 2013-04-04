@@ -168,6 +168,6 @@
         <antcall target="build"/>
     </target>
 	<junit> 
-		<test name="org.xraple.AppointmentProviderTest"/>
+		<test name="org.xrapla.*Test"/>
 	</junit>
 </project>
