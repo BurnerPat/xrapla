@@ -7,13 +7,13 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
-	<!-- --> 
+	<!-- 
 	<property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
 	<property name="main-class"  value="xraplaEJB"/>
-	<!-- -->
+	 -->
     <path id="EAR Libraries.libraryclasspath">
         <pathelement location="../../../../xrapla/EarContent/lib/antlr-2.7.7.jar"/>
         <pathelement location="../../../../xrapla/EarContent/lib/dom4j-1.6.1.jar"/>
@@ -88,7 +88,7 @@
         <path refid="JUnit 4.libraryclasspath"/>
         <path refid="GlassFish 3.1.2 [GlassFish 3.1.2].libraryclasspath"/>
     </path>
-	<!-- -->
+	<!--
 	<target name="compile">
 	        <mkdir dir="${classes.dir}"/>
 	        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
@@ -103,14 +103,14 @@
 	        </jar>
 	    </target>
 	<path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
-	<!--target name="run" depends="jar">
+	<target name="run" depends="jar">
         <java fork="true" classname="${main-class}">
             <classpath>
                 <path refid="classpath"/>
                 <path refid="application"/>
             </classpath>
         </java>
-    </target-->
+    </target>
 	<target name="junit" depends="jar">
 		<echo message="UnitTest"/>
         <junit printsummary="yes">
@@ -124,7 +124,7 @@
             </batchtest>
         </junit>
     </target>
-	<!-- -->
+	 -->
     <target name="init">
         <mkdir dir="build/classes"/>
         <copy includeemptydirs="false" todir="build/classes">
@@ -167,4 +167,7 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+	<junit>
+		<test name="org.xraple.AppointmentProviderTest"/>
+	</junit>
 </project>
