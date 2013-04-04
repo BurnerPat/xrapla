@@ -8,6 +8,7 @@ public class JenkinsTest {
 
 	@Test
 	public void test() {
+		System.out.println("Test reached");
 		try{		
 			assertTrue("Successful test",true);
 		} catch(Exception e){
