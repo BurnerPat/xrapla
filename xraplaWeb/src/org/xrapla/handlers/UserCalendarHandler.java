@@ -43,8 +43,8 @@ public class UserCalendarHandler {
 	}
 	
 	private void sortDays() {
-		Date min = null;
-		Date max = null;
+		int min = 23;
+		int max = 0;
 		
 		for (int i = 0; i < 7; i++) {
 			ArrayList<Appointment> d = day.get(i);
@@ -62,46 +62,44 @@ public class UserCalendarHandler {
 			}
 			
 			if (d.size() > 0) {
-				Date dmin = d.get(0).getDate();
-				Date dmax = d.get(d.size() - 1).getDate();
+				Date dmin = d.get(0).getTime();
+				Date dmax = d.get(d.size() - 1).getTime();
 				
-				if (min == null || dmin.before(min)) {
-					min = dmin;
+				Calendar c = Calendar.getInstance();
+				c.setTime(dmin);
+				int imin = c.get(Calendar.HOUR_OF_DAY);
+				c.setTime(dmax);
+				int imax = c.get(Calendar.HOUR_OF_DAY);
+				
+				if (imin < min) {
+					min = imin;
 				}
-				if (max == null || dmax.after(max)) {
-					max = dmax;
+				if (imax < max) {
+					max = imax;
 				}
 			}
 		}
 		
-		Calendar c = Calendar.getInstance();
-		if (min != null) {
-			c.setTime(min);
-			minHour = c.get(Calendar.HOUR_OF_DAY);
-		}
-		else {
-			minHour = 9;
-		}
+		minHour = (min < 24) ? min : 9;
+		maxHour = (max > 0) ? max : 16;
 		
-		if (max != null) {
-			c.setTime(max);
-			maxHour = c.get(Calendar.HOUR_OF_DAY);
-		}
-		else {
-			maxHour = 17;
-		}
+		maxHour = (maxHour - minHour > 8) ? maxHour : (minHour + 8);
 	}
 	
 	public ArrayList<Appointment> getDay(int d) {
 		return day.get(d);
 	}
 	
+	public ArrayList<ArrayList<Appointment>> getDays() {
+		return day;
+	}
+	
 	public int getMinHour() {
-		return (minHour >= 1) ? (minHour - 1) : minHour;
+		return minHour;
 	}
 	
 	public int getMaxHour() {
-		return (maxHour <= 22) ? (maxHour + 1) : maxHour;
+		return maxHour;
 	}
 	
 	public boolean isEmpty() {
