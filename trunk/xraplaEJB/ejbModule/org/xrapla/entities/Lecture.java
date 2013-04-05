@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Lecture implements Serializable {
 	@JoinColumn(name="COURSE_ID")
 	private Course course;
 	
-	@ManyToMany(mappedBy="lectures")
+	@ManyToMany(fetch=FetchType.EAGER, mappedBy="lectures")
 	private List<Docent> docent;
 	
 	@OneToMany(mappedBy="lecture")

@@ -1,10 +1,15 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.xrapla.factory.BeanFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.DateFormatSymbols" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="org.xrapla.entities.Appointment" %>
+<%@ page import="org.xrapla.entities.Docent" %>
 <%@ page import="org.xrapla.handlers.UserCalendarHandler" %>
 <%@ page import="org.xrapla.handlers.UserHandler" %>
 <!DOCTYPE html>
@@ -21,9 +26,12 @@
 		<div class="widget" id="calendar">
 			<div id="wrapper">
 				<%	Calendar calendar = Calendar.getInstance(); 
+					calendar.set(Calendar.WEEK_OF_YEAR, 11);
 					UserHandler userHandler = new UserHandler(request.getSession(true), BeanFactory.getUserProvider());
 					UserCalendarHandler handler = new UserCalendarHandler(userHandler.getUser(), calendar);
-				
+					
+					SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm"); 
+					
 					int minDay = 2;
 					int numDays = 6;
 					
@@ -31,7 +39,7 @@
 					String dayNames[] = symbols.getWeekdays();
 					
 					int minHour = handler.getMinHour();
-					int maxHour = handler.getMaxHour();%>
+					int maxHour = handler.getMaxHour(); %>
 				<table>
 					<thead>
 						<tr>
@@ -42,12 +50,53 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%	for (int i = minHour * 2; i <= maxHour * 2 + 1; i++) { %>
+						<%	for (int i = minHour * 2; i <= maxHour * 2 + 1; i++) {
+							int actualHour = i / 2;%>
 							<tr>
 								<th><%= (i % 2 == 0) ? (((i / 2 <= 9) ? ("0" + i / 2) : i / 2) + ":00") : "" %></th>
 								<% for (int day = minDay; day < minDay + numDays; day++) { 
-										int actualDay = (day - minDay) % 7; %>
-										<td></td>
+									int actualDay = (day - minDay + 1) % 7; 
+									
+									Appointment appointment = null;
+									for (Appointment a : handler.getDay(actualDay)) {
+										Calendar c = Calendar.getInstance();
+										c.setTime(a.getTime());
+										
+										if (c.get(Calendar.HOUR_OF_DAY) == actualHour) {
+											int m = c.get(Calendar.MINUTE);
+											
+											if (m >= (i % 2) * 30 && m < (i % 2 + 1) * 30) {
+												appointment = a;
+												break;
+											}
+										}
+									} %>
+									<td>
+										<% if (appointment != null) {
+											int height = appointment.getDuration() * 100 / 60 * 2;
+											Calendar c = Calendar.getInstance();
+											c.setTime(appointment.getTime());
+											int margin = (int)((double)(c.get(Calendar.MINUTE) % 30) / 30.0 * 32.0); %>
+											<div class="appointment" style="height: <%= height %>%; margin-top: <%= margin %>px;">
+												<div class="time">
+													<% Date end = new Date(appointment.getTime().getTime() + appointment.getDuration() * 60 * 1000); %>
+													<%= dateFormat.format(appointment.getTime()) %> - <%= dateFormat.format(end) %>
+												</div>
+												<div class="title"><%= appointment.getLecture().getName() %></div>
+												<div class="docent">
+													<% boolean br = !appointment.getLecture().getDocent().isEmpty();
+													   for (Docent d : appointment.getLecture().getDocent()) { %>
+														<%= d.getLastname() %>, <%= d.getFirstname() %>
+														<% if (br) { %>
+															<br>
+														<% } %>
+													<% } %>
+												</div>
+												<div class="room"><%= String.valueOf(appointment.getRoom().getWing()) + String.valueOf(appointment.getRoom().getNumber()) %></div>
+												<div class="category"><%= appointment.getCategory() %></div>
+											</div>
+										<% } %>
+									</td>
 								<% } %>
 							</tr>
 						<%	} %>

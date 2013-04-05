@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -43,7 +44,7 @@ public class Appointment implements Serializable {
 	private String category;
 	
 	@ManyToOne
-	@JoinColumn(name="LECTURE_ID")	
+	@JoinColumn(name="LECTURE_ID")
 	private Lecture lecture;	
 	
 	@ManyToOne
