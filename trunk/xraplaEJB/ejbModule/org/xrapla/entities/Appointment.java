@@ -34,7 +34,6 @@ public class Appointment implements Serializable {
 	@ManyToOne
 	@MapsId("roomId")
 	@JoinColumn(name = "room_number", referencedColumnName = "number")
-	// @PrimaryKeyJoinColumn(name="ROOM_ID", referencedColumnName="ROOM_ID")
 	private Room room;
 
 	@Column(name = "duration")

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE project>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
+<?eclipse.ant.import?>
 <project basedir="." default="build" name="xraplaWeb">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../eclipse"/>
@@ -12,13 +8,6 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
-	<!-- --> 
-	<property name="src.dir"     value="src"/>
-    <property name="build.dir"   value="build"/>
-    <property name="classes.dir" value="${build.dir}/classes"/>
-    <property name="jar.dir"     value="${build.dir}/jar"/>
-	<property name="main-class"  value="xraplaWeb"/>
-	<!-- -->
     <path id="Web App Libraries.libraryclasspath"/>
     <path id="EAR Libraries.libraryclasspath">
         <pathelement location="../../../../xrapla/EarContent/lib/antlr-2.7.7.jar"/>
