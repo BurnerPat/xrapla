@@ -126,7 +126,7 @@
     </target>
 	<junit printsummary="on" showoutput="on" filtertrace="off"> 
 		<batchtest todir="build/tests">
-            <fileset dir="build/classes/org/xrapla/test" includes="*Test.class" />			
+            <fileset dir="build/classes/org/xrapla/test" includes="*UnitTest.class" />			
         </batchtest>
 	</junit>
 </project>
