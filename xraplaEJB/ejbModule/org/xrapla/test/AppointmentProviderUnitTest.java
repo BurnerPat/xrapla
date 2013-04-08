@@ -16,6 +16,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.junit.Test;
 import org.xrapla.entities.Appointment;
 import org.xrapla.entities.Room;
 import org.xrapla.entities.Student;
@@ -74,7 +75,7 @@ public class AppointmentProviderUnitTest {
 		return rooms.size() == 0 ? null : rooms.get(0);
 	}
 
-	// @Test
+	@Test
 	public void testAppointmentForWeek() {
 		System.out.println("start AppointmentForWeekTest");
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
@@ -94,7 +95,7 @@ public class AppointmentProviderUnitTest {
 		System.out.println("stop AppointmentForWeekTest");
 	}
 
-	// @Test
+	@Test
 	public void testAppointmentForWeekAndRoom() {
 		System.out.println("start AppointmentForWeekAndRoom");
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
@@ -116,7 +117,7 @@ public class AppointmentProviderUnitTest {
 		System.out.println("stop AppointmentForWeekAndRoom");
 	}
 
-	// @Test
+	@Test
 	public void testNextTwoAppointments() {
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		User user = getTestUser();
@@ -133,7 +134,7 @@ public class AppointmentProviderUnitTest {
 		assertTrue("Count: ", nextEvents.size() <= 2);
 	}
 
-	// @Test
+	@Test
 	public void testNextExams() {
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		User user = getTestUser();
