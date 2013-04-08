@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE project>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
+<?eclipse.ant.import?>
 <project basedir="." default="build" name="xraplaEJB">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../eclipse"/>
@@ -25,8 +21,8 @@
         <pathelement location="../../../../../../xrapla/EarContent/lib/mysql-connector-java-5.1.23-bin.jar"/>
     </path>
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <pathelement location="D:\Software\Eclipse_neu\EclipseLink\eclipse/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+        <pathelement location="D:\Software\Eclipse_neu\EclipseLink\eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
     </path>
     <path id="GlassFish 3.1.2 [GlassFish 3.1.2].libraryclasspath">
         <pathelement location="D:/Software/Glassfish/glassfish3/glassfish/modules/glassfish-api.jar"/>
@@ -128,4 +124,9 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+	<junit printsummary="on" showoutput="on" filtertrace="off"> 
+		<batchtest todir="build/tests">
+	    	<fileset dir="build/classes/org/xrapla/test" includes="*Test.class" />			
+		</batchtest>
+	</junit>
 </project>
