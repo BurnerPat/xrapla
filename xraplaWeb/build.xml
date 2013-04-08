@@ -138,9 +138,4 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-	<junit printsummary="on" showoutput="on" filtertrace="off"> 
-		<batchtest todir="build/tests">
-			<fileset dir="build/classes/org/xrapla/test" includes="*Test.class" />			
-		</batchtest>
-	</junit>
 </project>
