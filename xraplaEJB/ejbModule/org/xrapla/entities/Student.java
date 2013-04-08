@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -14,32 +15,28 @@ import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Student
- *
+ * 
  */
 @Entity
 @DiscriminatorValue("STUDENT")
-@Table(name="student")
+@Table(name = "student")
 public class Student extends User implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="number")
+	@Column(name = "number")
 	private int number;
-	
+
 	@ManyToOne
-	@JoinColumn(name="COURSE_ID")
+	@JoinColumn(name = "COURSE_ID")
 	private Course relatedCourse;
-	
-	@ManyToMany
-	@JoinTable(name="STUDENT_GROUP",
-    	joinColumns={ @JoinColumn(name="STUDENT_ID", referencedColumnName="username")},
-    	inverseJoinColumns={@JoinColumn(name="GROUP_ID", referencedColumnName="ID")})
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "STUDENT_GROUP", joinColumns = { @JoinColumn(name = "STUDENT_ID", referencedColumnName = "username") }, inverseJoinColumns = { @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID") })
 	private List<CourseGroup> groups;
-	
-	
-	public Student(){
-		
+
+	public Student() {
+
 	}
 
 	public int getNumber() {
