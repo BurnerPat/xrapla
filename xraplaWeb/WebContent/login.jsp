@@ -29,7 +29,7 @@
 				Password: <input id="password" type="password">
 			</div>
 			<div id="error"></div>
-			<input id="submit" type="submit" class="button" value="Login">
+			<input id="submit" type="submit" class="button positive" value="Login">
 		</form>
 	</div>
 </body>
