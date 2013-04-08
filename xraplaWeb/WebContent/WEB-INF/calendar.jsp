@@ -1,5 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="org.xrapla.factory.BeanFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ page import="java.util.Calendar" %>
@@ -8,6 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.DateFormatSymbols" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.xrapla.factory.BeanFactory"%>
 <%@ page import="org.xrapla.entities.Appointment" %>
 <%@ page import="org.xrapla.entities.Docent" %>
 <%@ page import="org.xrapla.handlers.UserCalendarHandler" %>
@@ -37,12 +36,12 @@
 			   }
 			   %>
 			<a class="previous" href="${pageContext.request.contextPath}/page?p=calendar&week=<%= (week - 1 > 0) ? (week - 1) : (52) %>&year=<%= (week - 1 > 0) ? year : (year - 1) %>">&lt;&lt;Previous</a>
-			<select class="week">
+			<select class="week" onchange="window.location.href='${pageContext.request.contextPath}/page?p=calendar&week='+this.options[this.selectedIndex].value+'&year=<%= year %>';">
 				<% for (int i = 1; i <= 52; i++) { %>
 					<option value="<%= i %>"<%= (i == week) ? " selected=\"selected\"" : "" %>>CW <%= i %></option>
 				<% } %>
 			</select>
-			<input class="year" type="number" value="<%= year %>">
+			<input class="year" type="number" size="4" value="<%= year %>">
 			<a class="next" href="${pageContext.request.contextPath}/page?p=calendar&week=<%= (week + 1 <= 52) ? (week + 1) : 0 %>&year=<%= (week + 1 <= 52) ? year : (year + 1) %>">Next&gt;&gt;</a>
 		</div>
 		<div class="widget" id="calendar">
