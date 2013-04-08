@@ -60,6 +60,26 @@
 	border-bottom: 1px solid #D6D6D6;
 }
 
+#weekselect {
+	position: absolute;
+	right: 24px;
+	top: 24px;
+}
+
+#weekselect .previous,
+#weekselect .next {
+	color: white;
+	font-weight: bold;
+}
+
+#weekselect .previous {
+	margin-right: 8px;
+}
+
+#weekselect .next {
+	margin-left: 8px;
+}
+
 .appointment {
 	background-color: #ffbb33;
 	border: 2px solid #ff8800;

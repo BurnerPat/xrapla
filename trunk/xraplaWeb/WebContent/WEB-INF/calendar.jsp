@@ -23,10 +23,34 @@
 	</head>
 	<body>
 		<h1>My timetable</h1>
+		<div id="weekselect">
+			<% int week, year;
+			   
+			   try {
+				   week = Integer.parseInt(request.getParameter("week"));
+				   year = Integer.parseInt(request.getParameter("year"));
+			   }
+			   catch (Exception ex) {
+				   Calendar c = Calendar.getInstance();
+				   week = c.get(Calendar.WEEK_OF_YEAR);
+				   year = c.get(Calendar.YEAR);
+			   }
+			   %>
+			<a class="previous" href="${pageContext.request.contextPath}/page?p=calendar&week=<%= (week - 1 > 0) ? (week - 1) : (52) %>&year=<%= (week - 1 > 0) ? year : (year - 1) %>">&lt;&lt;Previous</a>
+			<select class="week">
+				<% for (int i = 1; i <= 52; i++) { %>
+					<option value="<%= i %>"<%= (i == week) ? " selected=\"selected\"" : "" %>>CW <%= i %></option>
+				<% } %>
+			</select>
+			<input class="year" type="number" value="<%= year %>">
+			<a class="next" href="${pageContext.request.contextPath}/page?p=calendar&week=<%= (week + 1 <= 52) ? (week + 1) : 0 %>&year=<%= (week + 1 <= 52) ? year : (year + 1) %>">Next&gt;&gt;</a>
+		</div>
 		<div class="widget" id="calendar">
 			<div id="wrapper">
 				<%	Calendar calendar = Calendar.getInstance(); 
-					calendar.set(Calendar.WEEK_OF_YEAR, 11);
+					calendar.set(Calendar.WEEK_OF_YEAR, week);
+					calendar.set(Calendar.YEAR, year);
+					
 					UserHandler userHandler = new UserHandler(request.getSession(true), BeanFactory.getUserProvider());
 					UserCalendarHandler handler = new UserCalendarHandler(userHandler.getUser(), calendar);
 					
