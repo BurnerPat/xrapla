@@ -73,10 +73,10 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 				+ "WHERE a.id.date>=?1 AND a.id.date<=?2";
 
 		if (user instanceof Student) {
-			query += " AND a.group IN :group";
+			query += "AND a.group IN (SELECT g FROM CourseGroup g JOIN Student s WHERE s = ?student)";
 		} else {
 			if (user instanceof Docent) {
-				query += " AND a.lecture IN :lecture";
+				query += "AND a.lecture IN (SELECT l FROM Lecture l JOIN Docent d WHERE d = ?docent)";
 			} else {
 				return null;
 			}
@@ -88,10 +88,10 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		q.setParameter(2, sunday.getTime());
 
 		if (user instanceof Student) {
-			q.setParameter("group", ((Student) user).getGroups());
+			q.setParameter("student", ((Student) user));
 		} else {
 			if (user instanceof Docent) {
-				q.setParameter("lecture", ((Docent) user).getLectures());
+				q.setParameter("docent", ((Docent) user));
 			}
 		}
 

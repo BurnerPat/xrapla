@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -31,7 +30,7 @@ public class Student extends User implements Serializable {
 	@JoinColumn(name = "COURSE_ID")
 	private Course relatedCourse;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "STUDENT_GROUP", joinColumns = { @JoinColumn(name = "STUDENT_ID", referencedColumnName = "username") }, inverseJoinColumns = { @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID") })
 	private List<CourseGroup> groups;
 
