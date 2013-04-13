@@ -86,7 +86,7 @@
         <mkdir dir="build/classes"/>
         <copy includeemptydirs="false" todir="build/classes">
             <fileset dir="ejbModule">
-                <!--exclude name="**/*.java"/-->
+                <exclude name="**/*.java"/>
             </fileset>
         </copy>
     </target>
