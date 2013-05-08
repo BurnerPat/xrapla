@@ -15,34 +15,40 @@
 		<h1>Appointments</h1>
 		<div class="widget">
 			<div class="row">
-				Group: <input name="nr" type="number" value="0000" data-required="true">
+				Group: <select name="group" data-required="true">
+							<option value="1">Gruppe 1</option>
+					   </select>
 			</div>
 			<div class="row">
-				Lecture <input name="name" type="text" data-required="true">
+				Lecture <select name="lecture" data-required="true">
+							<option value="1">Datenbanken</option>
+						</select>
 			</div>
 			<div class="row">
-				Category: <input name="name" type="text">
+				Category: <select name="name" data-required="true">
+						  		<option>default</option>
+						  		<option>exam</option>
+						  </select>
 			</div>
 			<div class="row">
-				Date: <input name="name" type="text" data-required="true" data-required="true">
+				Date: <input name="date" type="text" data-required="true" data-required="true">
 			</div>
 			<div class="row">
-				Time: <input name="name" type="text" data-required="true" data-required="true">
+				Time: <input name="time" type="text" data-required="true" data-required="true">
 			</div>
 			<div class="row">
-				Duration: <input name="name" type="text" data-required="true" data-required="true">
+				Duration: <input name="duration" type="number" data-required="true" data-required="true">
 			</div>
 			<div class="row">
-				Room: <input name="name" type="text" data-required="true" data-required="true">
+				Room: <select name="room" data-required="true">
+							<option>C-239</option>
+							<option>A-374</option>
+							<option>A-474</option>
+					  </select>
 			</div>
 			<div class="row">
-				Course: <select name="course">
-							<option>WWI10B1</option>
-							<option>WWI10B2</option>
-							<option>WWI11B1</option>
-							<option>WWI11B2</option>
-							<option>WWI12B1</option>
-							<option>WWI10B2</option>
+				Course: <select name="course" data-required="true">
+							<option value="1">WWI11B2</option>
 						</select>
 			</div>
 			<div id="error"></div>
