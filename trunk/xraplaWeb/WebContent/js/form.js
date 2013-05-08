@@ -5,7 +5,7 @@ $(document).ready(function() {
 	
 	$("[data-required='true']").each(function() {
 		var e = $(this);
-		req.insertBefore(e);
+		req.clone().insertBefore(e);
 	});
 	
 	$("#form").submit(function() {
