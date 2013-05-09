@@ -15,35 +15,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: Lecture
- *
- */
 @Entity
-@Table(name="lecture")
+@Table(name = "lecture")
 public class Lecture implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
-	
-	@ManyToOne
-	@JoinColumn(name="COURSE_ID")
-	private Course course;
-	
-	@ManyToMany(fetch=FetchType.EAGER, mappedBy="lectures")
-	private List<Docent> docent;
-	
-	@OneToMany(mappedBy="lecture")
-	private List<Appointment> appointments; 
 
-	public Lecture(){
+	@ManyToOne
+	@JoinColumn(name = "COURSE_ID")
+	private Course course;
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "lectures")
+	private List<Docent> docent;
+
+	@OneToMany(mappedBy = "lecture")
+	private List<Appointment> appointments;
+
+	public Lecture() {
 	}
 
 	public int getId() {

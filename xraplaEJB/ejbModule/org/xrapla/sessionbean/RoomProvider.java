@@ -10,9 +10,6 @@ import javax.persistence.TypedQuery;
 
 import org.xrapla.entities.Room;
 
-/**
- * Session Bean implementation class RoomProvider
- */
 @Stateless
 public class RoomProvider implements RoomProviderLocal {
 
@@ -34,6 +31,7 @@ public class RoomProvider implements RoomProviderLocal {
 		}
 	}
 
+	@Override
 	public Room getRoom(int id) {
 		String queryString = "SELECT r FROM Room r " + "WHERE r.id = :room";
 
