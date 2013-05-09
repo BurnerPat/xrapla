@@ -59,10 +59,12 @@ public class AjaxCreateAppointmentServlet extends HttpServlet {
 			Appointment appointment = new Appointment();
 			appointment.setCategory(category);
 			appointment.setDuration(duration);
+
 			appointment.setDate(date);
 			appointment.setTime(time);
+			appointment.setRoomId(roomId);
 
-			appointment = BeanFactory.getAppointmentProvider().createAppointment(appointment, group, lecture, roomId);
+			appointment = BeanFactory.getAppointmentProvider().createAppointment(appointment, group, lecture);
 
 			if (appointment == null) {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
