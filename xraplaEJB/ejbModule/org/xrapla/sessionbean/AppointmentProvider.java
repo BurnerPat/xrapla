@@ -219,8 +219,8 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 	}
 
 	@Override
-	public Appointment createAppointment(Appointment start, int groupId,
+	public Appointment createAppointment(Appointment template, int groupId,
 			int lectureId, int roomId) {
-		return start;
+		return template;
 	}
 }
