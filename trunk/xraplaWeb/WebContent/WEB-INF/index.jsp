@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css"/>
 </head>
 <body>
+	<nav>Common actions: <a class="button positive" href="page?p=calendar">View my calendar</a><a class="button positive" href="page?p=create_appointment">Create a new appointment</a></nav>
 	<h1>Heutige Vorlesungen</h1>
 	<div class="line">
 		<div class="widget">
