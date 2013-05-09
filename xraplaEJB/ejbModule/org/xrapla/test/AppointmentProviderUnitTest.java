@@ -22,6 +22,7 @@ import org.xrapla.entities.Room;
 import org.xrapla.entities.Student;
 import org.xrapla.entities.User;
 import org.xrapla.factory.BeanFactory;
+import org.xrapla.sessionbean.AppointmentProvider;
 import org.xrapla.sessionbean.AppointmentProviderLocal;
 
 public class AppointmentProviderUnitTest {
@@ -75,7 +76,7 @@ public class AppointmentProviderUnitTest {
 		return rooms.size() == 0 ? null : rooms.get(0);
 	}
 
-	@Test
+	// @Test
 	public void testAppointmentForWeek() {
 		System.out.println("start AppointmentForWeekTest");
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
@@ -95,7 +96,7 @@ public class AppointmentProviderUnitTest {
 		System.out.println("stop AppointmentForWeekTest");
 	}
 
-	@Test
+	// @Test
 	public void testAppointmentForWeekAndRoom() {
 		System.out.println("start AppointmentForWeekAndRoom");
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
@@ -117,7 +118,7 @@ public class AppointmentProviderUnitTest {
 		System.out.println("stop AppointmentForWeekAndRoom");
 	}
 
-	@Test
+	// @Test
 	public void testNextTwoAppointments() {
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		User user = getTestUser();
@@ -134,7 +135,7 @@ public class AppointmentProviderUnitTest {
 		assertTrue("Count: ", nextEvents.size() <= 2);
 	}
 
-	@Test
+	// @Test
 	public void testNextExams() {
 		AppointmentProviderLocal prov = BeanFactory.getAppointmentProvider();
 		User user = getTestUser();
@@ -146,5 +147,22 @@ public class AppointmentProviderUnitTest {
 			assertTrue("Date: ",
 					exam.getDate().getTime() >= new Date().getTime());
 		}
+	}
+
+	@Test
+	public void testCompare() {
+		AppointmentProvider provider = new AppointmentProvider();
+
+		Appointment today = new Appointment();
+		today.setID(new Date(), new Date(), 474);
+
+		Appointment todayEarlier = new Appointment();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR, -5);
+		todayEarlier.setID(new Date(), cal.getTime(), 474);
+
+		assertTrue("Größer: ", provider.compare(today, todayEarlier) > 0);
+		assertTrue("Kleiner: ", provider.compare(todayEarlier, today) < 0);
+		assertTrue("Gleich: ", provider.compare(today, today) == 0);
 	}
 }
