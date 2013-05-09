@@ -14,18 +14,12 @@ import javax.persistence.TypedQuery;
 import org.xrapla.entities.Appointment;
 import org.xrapla.entities.Room;
 
-/**
- * Session Bean implementation class RoomValidator
- */
 @Stateless
 public class RoomValidator implements RoomValidatorLocal {
 
 	@PersistenceContext
 	private EntityManager em;
 
-	/**
-	 * Default constructor.
-	 */
 	public RoomValidator() {
 	}
 

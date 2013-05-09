@@ -12,10 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: Docent
- * 
- */
 @Entity
 @DiscriminatorValue("DOCENT")
 @Table(name = "docent")
@@ -32,16 +28,16 @@ public class Docent extends User implements Serializable {
 	@JoinTable(name = "DOCENT_LECTURE", joinColumns = { @JoinColumn(name = "DOCENT_ID", referencedColumnName = "username") }, inverseJoinColumns = { @JoinColumn(name = "LECTURE_ID", referencedColumnName = "ID") })
 	private List<Lecture> lectures;
 
+	public Docent() {
+
+	}
+
 	public List<Lecture> getLectures() {
 		return lectures;
 	}
 
 	public void setLectures(List<Lecture> lectures) {
 		this.lectures = lectures;
-	}
-
-	public Docent() {
-
 	}
 
 	public String getTitle() {

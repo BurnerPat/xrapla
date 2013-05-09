@@ -22,9 +22,6 @@ import org.xrapla.entities.Room;
 import org.xrapla.entities.Student;
 import org.xrapla.entities.User;
 
-/**
- * Session Bean implementation class AppointmentProvider
- */
 @Stateless
 public class AppointmentProvider implements AppointmentProviderLocal {
 

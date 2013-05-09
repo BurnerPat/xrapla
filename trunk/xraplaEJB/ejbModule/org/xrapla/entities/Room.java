@@ -9,29 +9,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: Room
- *
- */
 @Entity
-@Table(name="room")
+@Table(name = "room")
 public class Room implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="number")
+	@Column(name = "number")
 	int number;
-	
-	@Column(name="wing")
+
+	@Column(name = "wing")
 	char wing;
-	
-	@OneToMany(mappedBy="room")
+
+	@OneToMany(mappedBy = "room")
 	List<Appointment> appointments;
-	
+
 	public Room() {
-		
+
 	}
 
 	public int getNumber() {
@@ -48,8 +43,8 @@ public class Room implements Serializable {
 
 	public void setWing(char wing) {
 		this.wing = wing;
-	}	
-	
+	}
+
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
@@ -58,7 +53,8 @@ public class Room implements Serializable {
 		this.appointments = appointments;
 	}
 
-	public String toString(){
+	@Override
+	public String toString() {
 		return "" + wing + number;
 	}
 }
