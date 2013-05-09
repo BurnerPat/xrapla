@@ -69,40 +69,16 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		sunday.setWeekDate(year, weekOfYear, Calendar.MONDAY);
 		sunday.add(Calendar.DATE, 7);
 
-		TypedQuery<Student> queryGroup = em
-				.createQuery(
-						"SELECT s FROM Student s JOIN FETCH s.groups WHERE s.username = :username",
-						Student.class);
+		TypedQuery<Appointment> q;
+		if (user instanceof Student)
+			q = getQuery(monday, sunday, (Student) user);
+		else if (user instanceof Docent)
+			q = getQuery(monday, sunday, (Docent) user);
+		else
+			return null;
 
-		queryGroup.setParameter("username", user.getUsername());
-
-		String queryString = "SELECT a " + "FROM Appointment a "
-				+ "WHERE a.id.date>=?1 AND a.id.date<=?2";
-
-		if (user instanceof Student) {
-			queryString += " AND a.group IN :groups";
-		} else {
-			if (user instanceof Docent) {
-				queryString += " AND a.lecture IN (SELECT d.lectures FROM Docent d WHERE d = :docent)";
-			} else {
-				return null;
-			}
-		}
-
-		TypedQuery<Appointment> q = em.createQuery(queryString,
-				Appointment.class);
-
-		q.setParameter(1, monday.getTime());
-		q.setParameter(2, sunday.getTime());
-
-		if (user instanceof Student) {
-			q.setParameter("groups", queryGroup.getResultList().get(0)
-					.getGroups());
-		} else {
-			if (user instanceof Docent) {
-				q.setParameter("docent", ((Docent) user));
-			}
-		}
+		if (q == null)
+			return null;
 
 		List<Appointment> appointments = null;
 		try {
@@ -111,6 +87,65 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 			appointments = null;
 		}
 		return appointments;
+	}
+
+	private TypedQuery<Appointment> getQuery(Calendar monday, Calendar sunday,
+			Student user) {
+
+		TypedQuery<Student> queryGroup = em
+				.createQuery(
+						"SELECT s FROM Student s JOIN FETCH s.groups WHERE s.username = :username",
+						Student.class);
+
+		queryGroup.setParameter("username", user.getUsername());
+
+		String queryString = "SELECT a FROM Appointment a "
+				+ "WHERE a.id.date>=?1 AND a.id.date<=?2"
+				+ " AND a.group IN :groups";
+
+		TypedQuery<Appointment> q = em.createQuery(queryString,
+				Appointment.class);
+
+		q.setParameter(1, monday.getTime());
+		q.setParameter(2, sunday.getTime());
+		try {
+			q.setParameter("groups", queryGroup.getResultList().get(0)
+					.getGroups());
+		} catch (IndexOutOfBoundsException ex) {
+			return null;
+		}
+
+		return q;
+	}
+
+	private TypedQuery<Appointment> getQuery(Calendar monday, Calendar sunday,
+			Docent user) {
+
+		TypedQuery<Docent> queryLecture = em
+				.createQuery(
+						"SELECT s FROM Docent s JOIN FETCH s.lectures WHERE s.username = :username",
+						Docent.class);
+
+		queryLecture.setParameter("username", user.getUsername());
+
+		String queryString = "SELECT a " + "FROM Appointment a "
+				+ "WHERE a.id.date>=?1 AND a.id.date<=?2"
+				+ " AND a.lecture IN :lectures";
+
+		TypedQuery<Appointment> q = em.createQuery(queryString,
+				Appointment.class);
+
+		q.setParameter(1, monday.getTime());
+		q.setParameter(2, sunday.getTime());
+
+		try {
+			q.setParameter("lectures", queryLecture.getResultList().get(0)
+					.getLectures());
+		} catch (IndexOutOfBoundsException ex) {
+			return null;
+		}
+
+		return q;
 	}
 
 	@Override
@@ -221,6 +256,7 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 	@Override
 	public Appointment createAppointment(Appointment template, int groupId,
 			int lectureId, int roomId) {
+
 		return template;
 	}
 }
