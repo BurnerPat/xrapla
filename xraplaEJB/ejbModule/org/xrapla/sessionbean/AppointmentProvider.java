@@ -249,8 +249,8 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		return appointments;
 	}
 
-	private int compare(Appointment app1, Appointment app2) {
-		return app1.getDate().compareTo(app2.getDate());
+	public int compare(Appointment app1, Appointment app2) {
+		return app1.getDateTime().compareTo(app2.getDateTime());
 	}
 
 	@Override
