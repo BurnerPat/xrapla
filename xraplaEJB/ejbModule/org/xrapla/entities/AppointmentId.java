@@ -54,6 +54,10 @@ public class AppointmentId implements Serializable {
 		this.time = time;
 	}
 
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
+	}
+
 	@Override
 	public int hashCode() {
 		return (roomId + date.hashCode() + time.hashCode());

@@ -73,6 +73,10 @@ public class Appointment implements Serializable {
 		id.setTime(time);
 	}
 
+	public void setRoomId(int room) {
+		id.setRoomId(room);
+	}
+
 	public int getDuration() {
 		return duration;
 	}
