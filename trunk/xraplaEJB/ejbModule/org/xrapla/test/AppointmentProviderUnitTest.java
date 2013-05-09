@@ -27,6 +27,44 @@ import org.xrapla.sessionbean.AppointmentProviderLocal;
 
 public class AppointmentProviderUnitTest {
 
+	@Test
+	public void testCompare() {
+		AppointmentProvider provider = new AppointmentProvider();
+
+		Appointment today = new Appointment();
+		today.setID(new Date(), new Date(), 474);
+
+		Appointment todayEarlier = new Appointment();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR, -5);
+		todayEarlier.setID(new Date(), cal.getTime(), 474);
+
+		assertTrue("Größer: ", provider.compare(today, todayEarlier) > 0);
+		assertTrue("Kleiner: ", provider.compare(todayEarlier, today) < 0);
+		assertTrue("Gleich: ", provider.compare(today, today) == 0);
+	}
+
+	@Test
+	public void testSort() {
+		AppointmentProvider provider = new AppointmentProvider();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		Calendar day = Calendar.getInstance();
+		for (int i = 0; i <= 6; i++) {
+			day.add(Calendar.DAY_OF_YEAR,
+					-(int) (Math.random() * day.get(Calendar.DAY_OF_YEAR)));
+			Appointment a = new Appointment();
+			a.setID(day.getTime(), new Date(), 474);
+			appointments.add(a);
+		}
+
+		appointments = provider.sort(appointments);
+
+		for (int j = 0; j < appointments.size() - 1; j++) {
+			assertTrue(provider.compare(appointments.get(j),
+					appointments.get(j + 1)) <= 1);
+		}
+	}
+
 	private User getTestUser() {
 		EntityManagerFactory factory;
 		factory = Persistence.createEntityManagerFactory("xrapla");
@@ -149,20 +187,4 @@ public class AppointmentProviderUnitTest {
 		}
 	}
 
-	@Test
-	public void testCompare() {
-		AppointmentProvider provider = new AppointmentProvider();
-
-		Appointment today = new Appointment();
-		today.setID(new Date(), new Date(), 474);
-
-		Appointment todayEarlier = new Appointment();
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.HOUR, -5);
-		todayEarlier.setID(new Date(), cal.getTime(), 474);
-
-		assertTrue("Größer: ", provider.compare(today, todayEarlier) > 0);
-		assertTrue("Kleiner: ", provider.compare(todayEarlier, today) < 0);
-		assertTrue("Gleich: ", provider.compare(today, today) == 0);
-	}
 }
