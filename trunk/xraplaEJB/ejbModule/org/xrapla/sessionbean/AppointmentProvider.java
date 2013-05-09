@@ -251,18 +251,22 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 
 	@Override
 	public Appointment createAppointment(Appointment template, int groupId,
-			int lectureId) {
+			int lectureId, int roomId) {
 
 		try {
 			CourseGroup group = getGroup(groupId);
 			Lecture lecture = getLecture(lectureId);
+			Room room = getRoom(roomId);
 
 			template.setGroup(group);
 			template.setLecture(lecture);
+			template.setRoom(room);
+
 			group.getAppointments().add(template);
 			lecture.getAppointments().add(template);
+			room.getAppointments().add(template);
 
-			template.getRoom().getAppointments().add(template);
+			// template.getRoom().getAppointments().add(template);
 
 			insert(template);
 		} catch (NoResultException | NonUniqueResultException uex) {
@@ -280,6 +284,16 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 				CourseGroup.class);
 
 		q.setParameter("group", id);
+
+		return q.getSingleResult();
+	}
+
+	private Room getRoom(int id) {
+		String queryString = "SELECT r FROM Room r " + "WHERE r.number = :room";
+
+		TypedQuery<Room> q = em.createQuery(queryString, Room.class);
+
+		q.setParameter("room", id);
 
 		return q.getSingleResult();
 	}
