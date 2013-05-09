@@ -31,13 +31,13 @@
 						  </select>
 			</div>
 			<div class="row">
-				Date: <input name="date" type="text" data-required="true" data-required="true">
+				Date: <input name="date" type="text" data-required="true">
 			</div>
 			<div class="row">
-				Time: <input name="time" type="text" data-required="true" data-required="true">
+				Time: <input name="time" type="text" data-required="true">
 			</div>
 			<div class="row">
-				Duration: <input name="duration" type="number" data-required="true" data-required="true">
+				Duration: <input name="duration" type="number" data-required="true">
 			</div>
 			<div class="row">
 				Room: <select name="room" data-required="true">
@@ -45,11 +45,6 @@
 							<option>A-374</option>
 							<option>A-474</option>
 					  </select>
-			</div>
-			<div class="row">
-				Course: <select name="course" data-required="true">
-							<option value="1">WWI11B2</option>
-						</select>
 			</div>
 			<div id="error"></div>
 			<input type="submit" class="button positive" value="Submit">

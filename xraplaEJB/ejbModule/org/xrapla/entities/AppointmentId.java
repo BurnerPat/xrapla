@@ -9,25 +9,25 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Embeddable
-public class AppointmentId implements Serializable { 
+public class AppointmentId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="roomid")
+	@Column(name = "roomid")
 	private int roomId;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="date")
+	@Column(name = "date")
 	private Date date;
-	
+
 	@Temporal(TemporalType.TIME)
-	@Column(name="time")
+	@Column(name = "time")
 	private Date time;
-	
+
 	public AppointmentId() {
-		
+
 	}
-	
+
 	public AppointmentId(int room, Date date, Date time) {
 		this.roomId = room;
 		this.date = date;
@@ -45,19 +45,27 @@ public class AppointmentId implements Serializable {
 	public Date getTime() {
 		return time;
 	}
-	
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
 	@Override
 	public int hashCode() {
 		return (roomId + date.hashCode() + time.hashCode());
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof AppointmentId) {
-			AppointmentId o = (AppointmentId)obj;
-			return (roomId == o.getRoomId() && date.equals(o.getDate()) && time.equals(o.getTime()));
-		}
-		else {
+			AppointmentId o = (AppointmentId) obj;
+			return (roomId == o.getRoomId() && date.equals(o.getDate()) && time
+					.equals(o.getTime()));
+		} else {
 			return false;
 		}
 	}
