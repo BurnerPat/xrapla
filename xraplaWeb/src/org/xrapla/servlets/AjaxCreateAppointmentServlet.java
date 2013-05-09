@@ -1,6 +1,7 @@
 package org.xrapla.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -58,14 +59,17 @@ public class AjaxCreateAppointmentServlet extends HttpServlet {
 			appointment.setCategory(category);
 			appointment.setDuration(duration);
 
-			appointment.setID(date, time, roomId);
+			appointment.setID(date, time);
 
-			appointment = BeanFactory.getAppointmentProvider().createAppointment(appointment, group, lecture);
+			appointment = BeanFactory.getAppointmentProvider().createAppointment(appointment, group, lecture, roomId);
 
 			if (appointment == null) {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
 			else {
+				PrintWriter out = new PrintWriter(response.getOutputStream());
+				out.print("success");
+				out.close();
 				response.setStatus(HttpServletResponse.SC_OK);
 			}
 		}

@@ -6,8 +6,9 @@ import javax.ejb.Local;
 
 import org.xrapla.entities.Room;
 
-
 @Local
 public interface RoomProviderLocal {
 	public List<Room> getRooms();
+
+	public Room getRoom(int id);
 }

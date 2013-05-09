@@ -28,8 +28,13 @@ public class AppointmentId implements Serializable {
 
 	}
 
-	public AppointmentId(int room, Date date, Date time) {
-		this.roomId = room;
+	public AppointmentId(int roomId, Date date, Date time) {
+		this.roomId = roomId;
+		this.date = date;
+		this.time = time;
+	}
+
+	public AppointmentId(Date date, Date time) {
 		this.date = date;
 		this.time = time;
 	}
