@@ -234,7 +234,7 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		}
 	}
 
-	private List<Appointment> sort(List<Appointment> appointments) {
+	public List<Appointment> sort(List<Appointment> appointments) {
 		for (int i = 1; i < appointments.size(); i++) {
 			Appointment appoinment = appointments.get(i);
 			int j = i - 1;
