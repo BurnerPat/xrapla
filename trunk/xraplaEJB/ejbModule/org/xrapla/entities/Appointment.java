@@ -15,6 +15,8 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.xrapla.sessionbean.RoomProvider;
+
 /**
  * Entity implementation class for Entity: Appointment
  * 
@@ -83,6 +85,7 @@ public class Appointment implements Serializable {
 
 	public void setID(Date date, Date time, int roomId) {
 		id = new AppointmentId(roomId, date, time);
+		room = new RoomProvider().getRoom(roomId);
 	}
 
 	public int getDuration() {
