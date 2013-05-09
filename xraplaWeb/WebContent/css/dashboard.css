@@ -13,3 +13,26 @@
 	color: #999999;
 	margin-bottom: 16px;
 }
+
+nav {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	border-bottom: 4px solid white;
+	padding: 16px 0 0 32px;
+	height: 38px;
+	background: #0099CC;
+	box-shadow: 4px 0 4px 0 black;
+	font-weight: bold;
+	color: white;
+}
+
+nav a {
+	margin: 8px;
+	text-decoration: none;
+}
+
+body {
+	padding-top: 72px;
+}
