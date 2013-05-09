@@ -69,16 +69,20 @@ public class Appointment implements Serializable {
 		return id.getTime();
 	}
 
-	public void setDate(Date date) {
-		id.setDate(date);
-	}
+	// public void setDate(Date date) {
+	// id.setDate(date);
+	// }
+	//
+	// public void setTime(Date time) {
+	// id.setTime(time);
+	// }
+	//
+	// public void setRoomId(int room) {
+	// id.setRoomId(room);
+	// }
 
-	public void setTime(Date time) {
-		id.setTime(time);
-	}
-
-	public void setRoomId(int room) {
-		id.setRoomId(room);
+	public void setID(Date date, Date time, int roomId) {
+		id = new AppointmentId(roomId, date, time);
 	}
 
 	public int getDuration() {
