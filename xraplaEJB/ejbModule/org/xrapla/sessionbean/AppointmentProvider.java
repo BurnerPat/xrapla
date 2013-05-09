@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -180,8 +181,7 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 		}
 	}
 
-	@Override
-	public void insert(Appointment appointment) {
+	private void insert(Appointment appointment) {
 		em.getTransaction().begin();
 		em.persist(appointment);
 		em.getTransaction().commit();
@@ -255,8 +255,40 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 
 	@Override
 	public Appointment createAppointment(Appointment template, int groupId,
-			int lectureId, int roomId) {
+			int lectureId) {
+
+		try {
+			template.setGroup(getGroup(groupId));
+			template.setLecture(getLecture(lectureId));
+			insert(template);
+		} catch (NoResultException | NonUniqueResultException uex) {
+			return null;
+		}
 
 		return template;
 	}
+
+	private CourseGroup getGroup(int id) {
+		String queryString = "SELECT g FROM CourseGroup g "
+				+ "WHERE g.id = :group";
+
+		TypedQuery<CourseGroup> q = em.createQuery(queryString,
+				CourseGroup.class);
+
+		q.setParameter("group", id);
+
+		return q.getSingleResult();
+	}
+
+	private Lecture getLecture(int id) {
+		String queryString = "SELECT l FROM Lecture l "
+				+ "WHERE l.id = :lecture";
+
+		TypedQuery<Lecture> q = em.createQuery(queryString, Lecture.class);
+
+		q.setParameter("lecture", id);
+
+		return q.getSingleResult();
+	}
+
 }

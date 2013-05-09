@@ -17,8 +17,6 @@ public interface AppointmentProviderLocal {
 
 	public List<Appointment> getNextTwoAppointments(User user);
 
-	public void insert(Appointment appointment);
-
 	public void remove(Appointment appointment);
 
 	public Appointment updateNonKey(Appointment appointment);
@@ -26,5 +24,5 @@ public interface AppointmentProviderLocal {
 	public List<Appointment> getExams(User user);
 
 	public Appointment createAppointment(Appointment template, int groupId,
-			int lectureId, int roomId);
+			int lectureId);
 }
