@@ -25,6 +25,6 @@ public interface AppointmentProviderLocal {
 
 	public List<Appointment> getExams(User user);
 
-	public Appointment createAppointment(Appointment start, int groupId,
+	public Appointment createAppointment(Appointment template, int groupId,
 			int lectureId, int roomId);
 }
