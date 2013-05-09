@@ -15,10 +15,6 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- * Entity implementation class for Entity: Appointment
- * 
- */
 @Entity
 @Table(name = "appointment")
 public class Appointment implements Serializable {
@@ -57,7 +53,6 @@ public class Appointment implements Serializable {
 	}
 
 	public Room getRoom() {
-		// return id.getRoom();
 		return room;
 	}
 
@@ -73,18 +68,6 @@ public class Appointment implements Serializable {
 	public Date getTime() {
 		return id.getTime();
 	}
-
-	// public void setDate(Date date) {
-	// id.setDate(date);
-	// }
-	//
-	// public void setTime(Date time) {
-	// id.setTime(time);
-	// }
-	//
-	// public void setRoomId(int room) {
-	// id.setRoomId(room);
-	// }
 
 	public void setID(Date date, Date time, int roomId) {
 		id = new AppointmentId(roomId, date, time);
