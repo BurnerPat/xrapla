@@ -52,6 +52,10 @@ public class Appointment implements Serializable {
 	public Appointment() {
 	}
 
+	public void initId() {
+		id = new AppointmentId();
+	}
+
 	public Room getRoom() {
 		// return id.getRoom();
 		return room;

@@ -37,7 +37,7 @@ public class AjaxCreateAppointmentServlet extends HttpServlet {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			date = dateFormat.parse(request.getParameter("date"));
 
-			SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+			SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 			time = timeFormat.parse(request.getParameter("time"));
 		}
 		catch (Exception ex) {
@@ -46,17 +46,15 @@ public class AjaxCreateAppointmentServlet extends HttpServlet {
 		}
 
 		int duration = Integer.valueOf(request.getParameter("duration"));
-		String roomSrc = request.getParameter("room");
+		int roomId = Integer.valueOf(request.getParameter("room"));
 
-		String room = roomSrc.split("-")[0];
-		String wing = roomSrc.split("-")[1];
-		int roomId = Integer.valueOf(room);
-
-		if (category == null || room == null || wing == null) {
+		if (category == null) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		else {
+			System.out.println("Creating new Appointment...");
 			Appointment appointment = new Appointment();
+			appointment.initId();
 			appointment.setCategory(category);
 			appointment.setDuration(duration);
 
