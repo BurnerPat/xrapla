@@ -217,4 +217,10 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 	private int compare(Appointment app1, Appointment app2) {
 		return app1.getDate().compareTo(app2.getDate());
 	}
+
+	@Override
+	public Appointment createAppointment(Appointment start, int groupId,
+			int lectureId, int roomId) {
+		return start;
+	}
 }
