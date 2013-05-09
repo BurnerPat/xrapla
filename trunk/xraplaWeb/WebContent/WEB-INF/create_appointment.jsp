@@ -9,6 +9,33 @@
 	
 	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/js/form.js"></script>
+	
+	<script>
+		function onSubmit() {
+			$("#submit").val("Please wait...");
+			var form = $("#form").serializeArray();
+			
+			$("#form *").prop("disabled", true);
+			$.post("ajaxCreateAppointment", 
+					form
+			).done(function(data) {
+				if (data == "success") {
+					window.location.href = "page?p=index";
+				}
+				else {
+					error("Room is occupied.<br>Suggestion: " + data);
+					$("#submit").val("Submit");
+					$("#login *").prop("disabled", false);
+				}		
+			}).fail(function() {
+				error("An error occured.");
+				$("#submit").val("Submit");
+				$("#login *").prop("disabled", false);
+			});
+			
+			return false;
+		}
+	</script>
 </head>
 <body>
 	<form id="form">
@@ -25,7 +52,7 @@
 						</select>
 			</div>
 			<div class="row">
-				Category: <select name="name" data-required="true">
+				Category: <select name="category" data-required="true">
 						  		<option>default</option>
 						  		<option>exam</option>
 						  </select>
@@ -41,14 +68,14 @@
 			</div>
 			<div class="row">
 				Room: <select name="room" data-required="true">
-							<option>C-239</option>
-							<option>A-374</option>
-							<option>A-474</option>
+							<option value="239">C-239</option>
+							<option value="374">A-374</option>
+							<option value="474">A-474</option>
 					  </select>
 			</div>
 			<div id="error"></div>
-			<input type="submit" class="button positive" value="Submit">
-			<input type="button" class="button negative" value="Cancel">
+			<input id="submit" type="submit" class="button positive" value="Submit">
+			<input type="button" class="button negative" value="Cancel" onclick="window.history.back();">
 		</div>
 	</form>
 </body>

@@ -18,7 +18,13 @@ $(document).ready(function() {
 				return false;
 			}
 		});
-		return success;
+		
+		if (success) {
+			return onSubmit();
+		}
+		else {
+			return false;
+		}
 	});
 });
 
