@@ -182,9 +182,9 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 	}
 
 	private void insert(Appointment appointment) {
-		em.getTransaction().begin();
+		// em.getTransaction().begin();
 		em.persist(appointment);
-		em.getTransaction().commit();
+		// em.getTransaction().commit();
 	}
 
 	@Override
@@ -258,8 +258,14 @@ public class AppointmentProvider implements AppointmentProviderLocal {
 			int lectureId) {
 
 		try {
+			CourseGroup group = getGroup(groupId);
+			Lecture lecture = getLecture(lectureId);
+
 			template.setGroup(getGroup(groupId));
 			template.setLecture(getLecture(lectureId));
+			group.getAppointments().add(template);
+			lecture.getAppointments().add(template);
+
 			insert(template);
 		} catch (NoResultException | NonUniqueResultException uex) {
 			return null;
