@@ -18,17 +18,29 @@ public class RoomProvider implements RoomProviderLocal {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	public RoomProvider(){}
-	
+
+	public RoomProvider() {
+	}
+
+	@Override
 	public List<Room> getRooms() {
 		TypedQuery<Room> q = em.createQuery("SELECT r " + "FROM Room r",
 				Room.class);
 		try {
 			List<Room> rooms = q.getResultList();
 			return rooms;
-		} catch(NoResultException ex) {
+		} catch (NoResultException ex) {
 			return null;
 		}
+	}
+
+	public Room getRoom(int id) {
+		String queryString = "SELECT r FROM Room r " + "WHERE r.id = :room";
+
+		TypedQuery<Room> q = em.createQuery(queryString, Room.class);
+
+		q.setParameter("room", id);
+
+		return q.getSingleResult();
 	}
 }
