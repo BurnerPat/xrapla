@@ -9,8 +9,17 @@
 <%@ page import="org.xrapla.factory.BeanFactory"%>
 <%@ page import="org.xrapla.entities.Appointment" %>
 <%@ page import="org.xrapla.entities.Docent" %>
+<%@ page import="org.xrapla.entities.Tutor" %>
 <%@ page import="org.xrapla.handlers.UserCalendarHandler" %>
 <%@ page import="org.xrapla.handlers.UserHandler" %>
+<% //Quirk
+	UserHandler userHandler = new UserHandler(request.getSession(true), BeanFactory.getUserProvider());
+
+	if (userHandler.getUser() instanceof Tutor) {
+		response.sendRedirect("/");
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -95,8 +104,7 @@
 		</div>
 		<div class="widget" id="calendar">
 			<div id="wrapper">
-				<%	UserHandler userHandler = new UserHandler(request.getSession(true), BeanFactory.getUserProvider());
-					UserCalendarHandler handler = new UserCalendarHandler(userHandler.getUser(), calendar);
+				<%	UserCalendarHandler handler = new UserCalendarHandler(userHandler.getUser(), calendar);
 					
 					SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm"); 
 					

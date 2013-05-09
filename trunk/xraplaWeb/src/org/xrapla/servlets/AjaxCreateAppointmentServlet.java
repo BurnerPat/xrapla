@@ -38,27 +38,38 @@ public class AjaxCreateAppointmentServlet extends HttpServlet {
 			date = dateFormat.parse(request.getParameter("date"));
 
 			SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-			time = dateFormat.parse(request.getParameter("time"));
+			time = timeFormat.parse(request.getParameter("time"));
 		}
 		catch (Exception ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 
-		long duration = Long.valueOf(request.getParameter("duration"));
+		int duration = Integer.valueOf(request.getParameter("duration"));
 		String roomSrc = request.getParameter("room");
 
-		String roomCorridor = roomSrc.split("-")[0];
-		String roomNumber = roomSrc.split("-")[1];
+		String room = roomSrc.split("-")[0];
+		String wing = roomSrc.split("-")[1];
+		int roomId = Integer.valueOf(room);
 
-		int course = Integer.valueOf(request.getParameter("course"));
-
-		if (category == null || roomCorridor == null || roomNumber == null) {
+		if (category == null || room == null || wing == null) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		else {
 			Appointment appointment = new Appointment();
-			BeanFactory.getAppointmentProvider().insert(appointment);
+			appointment.setCategory(category);
+			appointment.setDuration(duration);
+			appointment.setDate(date);
+			appointment.setTime(time);
+
+			appointment = BeanFactory.getAppointmentProvider().createAppointment(appointment, group, lecture, roomId);
+
+			if (appointment == null) {
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			}
+			else {
+				response.setStatus(HttpServletResponse.SC_OK);
+			}
 		}
 	}
 
