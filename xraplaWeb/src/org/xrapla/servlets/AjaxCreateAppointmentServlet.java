@@ -58,9 +58,7 @@ public class AjaxCreateAppointmentServlet extends HttpServlet {
 			appointment.setCategory(category);
 			appointment.setDuration(duration);
 
-			appointment.setDate(date);
-			appointment.setTime(time);
-			appointment.setRoomId(roomId);
+			appointment.setID(date, time, roomId);
 
 			appointment = BeanFactory.getAppointmentProvider().createAppointment(appointment, group, lecture);
 
