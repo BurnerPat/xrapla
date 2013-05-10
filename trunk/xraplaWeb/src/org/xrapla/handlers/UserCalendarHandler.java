@@ -69,19 +69,19 @@ public class UserCalendarHandler {
 				c.setTime(dmin);
 				int imin = c.get(Calendar.HOUR_OF_DAY);
 				c.setTime(dmax);
-				int imax = c.get(Calendar.HOUR_OF_DAY);
+				int imax = c.get(Calendar.HOUR_OF_DAY) + ((d.get(d.size() - 1).getDuration() + 60) / 60);
 
 				if (imin < min) {
 					min = imin;
 				}
-				if (imax < max) {
+				if (imax > max) {
 					max = imax;
 				}
 			}
 		}
 
-		minHour = (min < 23) ? min : 9;
-		maxHour = (max > 0) ? max : 16;
+		minHour = (min < 23) ? ((min >= 2) ? (min - 2) : 0) : 9;
+		maxHour = (max > 0) ? ((max <= 21) ? (max + 2) : 23) : 16;
 
 		maxHour = (maxHour - minHour > 8) ? maxHour : (minHour + 8);
 	}
